@@ -3,10 +3,14 @@
 #include <vector>
 
 
-Node::Node(std::string message) : message_(message) {}
+Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker) {}
 
 std::string Node::getMessage() {
     return message_;
+}
+
+std::string Node::getSpeaker() {
+    return speaker_;
 }
 
 int Node::getChoiceCount() {
@@ -33,8 +37,16 @@ std::vector<std::string> Node::getChoiceMessages() {
     return result;
 }
 
+std::string Node::printMessage() {
+    return speaker_ + ": " + message_;
+}
+
 void Node::setMessage(std::string newMessage) {
     message_ = newMessage;
+}
+
+void Node::setSpeaker(std::string newSpeaker) {
+    speaker_ = newSpeaker;
 }
 
 void Node::addChoice(Node* nextNode) {
