@@ -1,8 +1,8 @@
 #include "dialogue.hpp"
 
 
-Dialogue::Dialogue(std::string headMessage) {
-    nodes_.push_back(Node(headMessage));
+Dialogue::Dialogue(std::string headMessage, std::string speaker) {
+    nodes_.push_back(Node(headMessage, speaker));
     head_ = &nodes_[0];
     reset();
 }
@@ -19,16 +19,28 @@ std::string Dialogue::getMessage() {
     return current_->getMessage();
 }
 
+std::string Dialogue::getSpeaker() {
+    return current_->getSpeaker();
+}
+
+std::string Dialogue::printMessage() {
+    return current_->printMessage();
+}
+
 std::vector<std::string> Dialogue::getChoiceMessages() {
     return current_->getChoiceMessages();
+}
+
+std::vector<std::string> Dialogue::printChoiceMessages() {
+    return current_->printChoiceMessages();
 }
 
 bool Dialogue::isDone() {
     return current_ == nullptr;
 }
 
-int Dialogue::addNode(std::string message) {
-    nodes_.push_back(Node(message));
+int Dialogue::addNode(std::string message, std::string speaker) {
+    nodes_.push_back(Node(message, speaker));
     return nodes_.size() - 1;
 }
 
