@@ -1,4 +1,5 @@
 #include "node.cpp"
+#include <string>
 #include <vector>
 
 
@@ -10,6 +11,8 @@ private:
 
 public:
     Dialogue(std::string headMessage);
+
+    int addNode(std::string message);
 
     void reset();
 };

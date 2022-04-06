@@ -7,6 +7,11 @@ Dialogue::Dialogue(std::string headMessage) {
     reset();
 }
 
+int Dialogue::addNode(std::string message) {
+    nodes_.push_back(Node(message));
+    return nodes_.size() - 1;
+}
+
 void Dialogue::reset() {
     current_ = head_;
 }
