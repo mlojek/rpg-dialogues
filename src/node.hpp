@@ -11,7 +11,7 @@ public:
     Node(std::string message);
 
     std::string getMessage();
-    int getChoiceNo();
+    int getChoiceCount();
 
     void setMessage(std::string newMessage);
     void addChoice(Node* nextNode);

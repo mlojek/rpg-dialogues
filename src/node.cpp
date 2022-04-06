@@ -7,7 +7,7 @@ std::string Node::getMessage() {
     return message_;
 }
 
-int Node::getChoiceNo() {
+int Node::getChoiceCount() {
     return nextNodes_.size();
 }
 
