@@ -5,6 +5,7 @@
 class Dialogue {
 private:
     Node* head_;
+    Node* current_;
     std::vector<Node> nodes_;
 
 public:
