@@ -13,6 +13,7 @@ public:
     std::string getMessage();
     int getChoiceCount();
     Node* getNext(int choiceNo);
+    std::vector<std::string> getChoiceMessages();
 
     void setMessage(std::string newMessage);
     void addChoice(Node* nextNode);

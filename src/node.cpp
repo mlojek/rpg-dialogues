@@ -1,5 +1,6 @@
 #include "node.hpp"
 #include <cstddef>
+#include <vector>
 
 
 Node::Node(std::string message) : message_(message) {}
@@ -17,6 +18,16 @@ Node* Node::getNext(int choiceNo) {
         return nullptr;
     else
         return nextNodes_[choiceNo];
+}
+
+std::vector<std::string> Node::getChoiceMessages() {
+    std::vector<std::string> result;
+
+    for (auto choice : nextNodes_) {
+        result.push_back(choice->getMessage());
+    }
+
+    return result;
 }
 
 void Node::setMessage(std::string newMessage) {
