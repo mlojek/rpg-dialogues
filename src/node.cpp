@@ -14,3 +14,7 @@ int Node::getChoiceNo() {
 void Node::setMessage(std::string newMessage) {
     message_ = newMessage;
 }
+
+void Node::addChoice(Node* nextNode) {
+    nextNodes_.push_back(nextNode);
+}

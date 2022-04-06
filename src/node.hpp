@@ -14,4 +14,5 @@ public:
     int getChoiceNo();
 
     void setMessage(std::string newMessage);
+    void addChoice(Node* nextNode);
 };
