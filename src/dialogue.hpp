@@ -12,7 +12,14 @@ private:
 public:
     Dialogue(std::string headMessage);
 
+    int getNodeCount();
+    int getChoiceCount();
+    std::string getMessage();
+    std::vector<std::string> getChoiceMessages();
+    bool isDone();
+    
     int addNode(std::string message);
 
+    void makeChoice(unsigned choiceNo);
     void reset();
 };
