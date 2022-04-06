@@ -14,7 +14,7 @@ int Node::getChoiceCount() {
 }
 
 Node* Node::getNext(int choiceNo) {
-    if (choiceNo > nextNodes_.size())
+    if (choiceNo >= nextNodes_.size() || choiceNo < 0)
         return nullptr;
     else
         return nextNodes_[choiceNo];
