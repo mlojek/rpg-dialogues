@@ -32,6 +32,14 @@ int Dialogue::addNode(std::string message) {
     return nodes_.size() - 1;
 }
 
+void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
+    nodes_[nodeIndex0].addChoice(&nodes_[nodeIndex1]);
+}
+
+void Dialogue::addTerminalChoice(unsigned nodeIndex) {
+    nodes_[nodeIndex].addChoice(nullptr);
+}
+
 void Dialogue::makeChoice(unsigned choiceNo) {
     current_ = current_->getNext(choiceNo);
 }

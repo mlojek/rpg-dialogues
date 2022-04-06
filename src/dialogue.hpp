@@ -20,6 +20,9 @@ public:
     
     int addNode(std::string message);
 
+    void linkNodes(unsigned nodeIndex0, unsigned nodeIndex1);
+    void addTerminalChoice(unsigned nodeIndex);
+
     void makeChoice(unsigned choiceNo);
     void reset();
 };
