@@ -40,3 +40,7 @@ void Node::setMessage(std::string newMessage) {
 void Node::addChoice(Node* nextNode) {
     nextNodes_.push_back(nextNode);
 }
+
+void Node::resetChoices() {
+    nextNodes_.clear();
+}

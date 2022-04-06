@@ -17,4 +17,6 @@ public:
 
     void setMessage(std::string newMessage);
     void addChoice(Node* nextNode);
+
+    void resetChoices();
 };
