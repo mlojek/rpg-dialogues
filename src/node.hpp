@@ -9,4 +9,8 @@ private:
 
 public:
     Node(std::string message);
+
+    std::string getMessage();
+
+    void setMessage(std::string newMessage);
 };
