@@ -10,4 +10,6 @@ private:
 
 public:
     Dialogue(std::string headMessage);
+
+    void reset();
 };
