@@ -24,7 +24,10 @@ std::vector<std::string> Node::getChoiceMessages() {
     std::vector<std::string> result;
 
     for (auto choice : nextNodes_) {
-        result.push_back(choice->getMessage());
+        if (choice == nullptr)
+            result.push_back("[END]");
+        else
+            result.push_back(choice->getMessage());
     }
 
     return result;
