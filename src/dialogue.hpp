@@ -9,5 +9,5 @@ private:
     std::vector<Node> nodes_;
 
 public:
-    Dialogue(Node headNode);
+    Dialogue(std::string headMessage);
 };
