@@ -18,6 +18,7 @@ public:
     std::vector<std::string> getChoiceMessages();
 
     std::string printMessage();
+    std::vector<std::string> printChoiceMessages();
 
     void setMessage(std::string newMessage);
     void setSpeaker(std::string newSpeaker);

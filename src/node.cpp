@@ -41,6 +41,19 @@ std::string Node::printMessage() {
     return speaker_ + ": " + message_;
 }
 
+std::vector<std::string> Node::printChoiceMessages() {
+    std::vector<std::string> result;
+
+    for (auto choice : nextNodes_) {
+        if (choice == nullptr)
+            result.push_back("[END]");
+        else
+            result.push_back(choice->printMessage());
+    }
+
+    return result;
+}
+
 void Node::setMessage(std::string newMessage) {
     message_ = newMessage;
 }
