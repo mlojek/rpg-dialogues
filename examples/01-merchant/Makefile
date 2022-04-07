@@ -3,4 +3,4 @@ CFLAGS = -Wall
 
 
 all:
-	$(CC) $(CFALGS) main.cpp -o run
+	$(CC) $(CFALGS) main.cpp ../../src/* -o run
