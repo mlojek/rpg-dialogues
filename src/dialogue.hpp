@@ -2,7 +2,7 @@
 #define DIALOGUE_HPP
 
 
-#include "node.cpp"
+#include "node.hpp"
 #include <string>
 #include <vector>
 
