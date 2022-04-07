@@ -1,3 +1,7 @@
+#ifndef NODE_HPP
+#define NODE_HPP
+
+
 #include <vector>
 #include <string>
 
@@ -26,3 +30,6 @@ public:
 
     void resetChoices();
 };
+
+
+#endif

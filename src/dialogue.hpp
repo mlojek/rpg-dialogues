@@ -1,3 +1,7 @@
+#ifndef DIALOGUE_HPP
+#define DIALOGUE_HPP
+
+
 #include "node.cpp"
 #include <string>
 #include <vector>
@@ -29,3 +33,6 @@ public:
     void makeChoice(unsigned choiceNo);
     void reset();
 };
+
+
+#endif
