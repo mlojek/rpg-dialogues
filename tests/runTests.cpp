@@ -1,6 +1,7 @@
 #include <gtest/gtest.h>
 
 #include "testNode.hpp"
+#include "testDialogue.hpp"
 
 
 int main(int argc, char **argv) {
