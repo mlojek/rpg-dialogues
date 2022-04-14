@@ -4,7 +4,6 @@
 namespace rpgDialogue {
     Dialogue::Dialogue(std::string headMessage, std::string speaker) {
         nodes_.push_back(Node(headMessage, speaker));
-        head_ = &nodes_[0];
         reset();
     }
 
@@ -42,15 +41,18 @@ namespace rpgDialogue {
 
     int Dialogue::addNode(std::string message, std::string speaker) {
         nodes_.push_back(Node(message, speaker));
+        reset();
         return nodes_.size() - 1;
     }
 
     void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
         nodes_[nodeIndex0].addChoice(&nodes_[nodeIndex1]);
+        reset();
     }
 
     void Dialogue::addTerminalChoice(unsigned nodeIndex) {
         nodes_[nodeIndex].addChoice(nullptr);
+        reset();
     }
 
     void Dialogue::makeChoice(unsigned choiceNo) {
@@ -58,6 +60,7 @@ namespace rpgDialogue {
     }
 
     void Dialogue::reset() {
+        head_ = &nodes_[0];
         current_ = head_;
     }
 }
