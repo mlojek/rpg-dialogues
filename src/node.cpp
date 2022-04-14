@@ -3,69 +3,71 @@
 #include <vector>
 
 
-Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker) {}
+namespace rpgDialogue {
+    Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker) {}
 
-std::string Node::getMessage() {
-    return message_;
-}
-
-std::string Node::getSpeaker() {
-    return speaker_;
-}
-
-int Node::getChoiceCount() {
-    return nextNodes_.size();
-}
-
-Node* Node::getNext(int choiceNo) {
-    if (choiceNo >= nextNodes_.size() || choiceNo < 0)
-        return nullptr;
-    else
-        return nextNodes_[choiceNo];
-}
-
-std::vector<std::string> Node::getChoiceMessages() {
-    std::vector<std::string> result;
-
-    for (auto choice : nextNodes_) {
-        if (choice == nullptr)
-            result.push_back("[END]");
-        else
-            result.push_back(choice->getMessage());
+    std::string Node::getMessage() {
+        return message_;
     }
 
-    return result;
-}
-
-std::string Node::printMessage() {
-    return speaker_ + ": " + message_;
-}
-
-std::vector<std::string> Node::printChoiceMessages() {
-    std::vector<std::string> result;
-
-    for (auto choice : nextNodes_) {
-        if (choice == nullptr)
-            result.push_back("[END]");
-        else
-            result.push_back(choice->printMessage());
+    std::string Node::getSpeaker() {
+        return speaker_;
     }
 
-    return result;
-}
+    int Node::getChoiceCount() {
+        return nextNodes_.size();
+    }
 
-void Node::setMessage(std::string newMessage) {
-    message_ = newMessage;
-}
+    Node* Node::getNext(int choiceNo) {
+        if (choiceNo >= nextNodes_.size() || choiceNo < 0)
+            return nullptr;
+        else
+            return nextNodes_[choiceNo];
+    }
 
-void Node::setSpeaker(std::string newSpeaker) {
-    speaker_ = newSpeaker;
-}
+    std::vector<std::string> Node::getChoiceMessages() {
+        std::vector<std::string> result;
 
-void Node::addChoice(Node* nextNode) {
-    nextNodes_.push_back(nextNode);
-}
+        for (auto choice : nextNodes_) {
+            if (choice == nullptr)
+                result.push_back("[END]");
+            else
+                result.push_back(choice->getMessage());
+        }
 
-void Node::resetChoices() {
-    nextNodes_.clear();
+        return result;
+    }
+
+    std::string Node::printMessage() {
+        return speaker_ + ": " + message_;
+    }
+
+    std::vector<std::string> Node::printChoiceMessages() {
+        std::vector<std::string> result;
+
+        for (auto choice : nextNodes_) {
+            if (choice == nullptr)
+                result.push_back("[END]");
+            else
+                result.push_back(choice->printMessage());
+        }
+
+        return result;
+    }
+
+    void Node::setMessage(std::string newMessage) {
+        message_ = newMessage;
+    }
+
+    void Node::setSpeaker(std::string newSpeaker) {
+        speaker_ = newSpeaker;
+    }
+
+    void Node::addChoice(Node* nextNode) {
+        nextNodes_.push_back(nextNode);
+    }
+
+    void Node::resetChoices() {
+        nextNodes_.clear();
+    }
 }

@@ -5,6 +5,9 @@
 #include "../../src/dialogue.hpp"
 
 
+using namespace rpgDialogue;
+
+
 int main() {
     Dialogue merchantDialogue("Welcome to my humble shop, traveller!", "Merchant");
     int choice;

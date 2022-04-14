@@ -5,6 +5,9 @@
 #include "../src/dialogue.hpp"
 
 
+using namespace rpgDialogue;
+
+
 TEST(testDialogue, testConstructor) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 

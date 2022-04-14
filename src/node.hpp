@@ -6,30 +6,32 @@
 #include <string>
 
 
-class Node {
-private:
-    std::string message_;
-    std::string speaker_;
-    std::vector<Node*> nextNodes_;
+namespace rpgDialogue {
+    class Node {
+    private:
+        std::string message_;
+        std::string speaker_;
+        std::vector<Node*> nextNodes_;
 
-public:
-    Node(std::string message, std::string speaker);
+    public:
+        Node(std::string message, std::string speaker);
 
-    std::string getMessage();
-    std::string getSpeaker();
-    int getChoiceCount();
-    Node* getNext(int choiceNo);
-    std::vector<std::string> getChoiceMessages();
+        std::string getMessage();
+        std::string getSpeaker();
+        int getChoiceCount();
+        Node* getNext(int choiceNo);
+        std::vector<std::string> getChoiceMessages();
 
-    std::string printMessage();
-    std::vector<std::string> printChoiceMessages();
+        std::string printMessage();
+        std::vector<std::string> printChoiceMessages();
 
-    void setMessage(std::string newMessage);
-    void setSpeaker(std::string newSpeaker);
-    void addChoice(Node* nextNode);
+        void setMessage(std::string newMessage);
+        void setSpeaker(std::string newSpeaker);
+        void addChoice(Node* nextNode);
 
-    void resetChoices();
-};
+        void resetChoices();
+    };
+}
 
 
 #endif

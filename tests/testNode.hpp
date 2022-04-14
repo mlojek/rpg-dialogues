@@ -7,6 +7,9 @@
 #include "../src/node.hpp"
 
 
+using namespace rpgDialogue;
+
+
 TEST(testNode, testConstructor) {
     Node testNode = Node("Node message.", "Node speaker");
 
