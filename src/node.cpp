@@ -38,6 +38,22 @@ namespace rpgDialogue {
         return result;
     }
 
+    std::vector<std::string> Node::getChoiceMessagesNumbered() {
+        std::vector<std::string> result;
+        int iter = 0;
+
+        for (auto choice : nextNodes_) {
+            if (choice == nullptr)
+                result.push_back(std::to_string(iter) + ") [END]");
+            else
+                result.push_back(std::to_string(iter) + ") " + choice->getMessage());
+
+            iter++;
+        }
+
+        return result;
+    }
+
     std::string Node::printMessage() {
         return speaker_ + ": " + message_;
     }
@@ -50,6 +66,22 @@ namespace rpgDialogue {
                 result.push_back("[END]");
             else
                 result.push_back(choice->printMessage());
+        }
+
+        return result;
+    }
+
+    std::vector<std::string> Node::printChoiceMessagesNumbered() {
+        std::vector<std::string> result;
+        int iter = 0;
+
+        for (auto choice : nextNodes_) {
+            if (choice == nullptr)
+                result.push_back(std::to_string(iter) + ") [END]");
+            else
+                result.push_back(std::to_string(iter) + ") " + choice->printMessage());
+
+            iter++;
         }
 
         return result;

@@ -21,9 +21,11 @@ namespace rpgDialogue {
         int getChoiceCount();
         Node* getNext(int choiceNo);
         std::vector<std::string> getChoiceMessages();
+        std::vector<std::string> getChoiceMessagesNumbered();
 
         std::string printMessage();
         std::vector<std::string> printChoiceMessages();
+        std::vector<std::string> printChoiceMessagesNumbered();
 
         void setMessage(std::string newMessage);
         void setSpeaker(std::string newSpeaker);
