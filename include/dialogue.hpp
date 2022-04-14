@@ -23,7 +23,10 @@ namespace rpgDialogue {
         std::string getSpeaker();
         std::string printMessage();
         std::vector<std::string> getChoiceMessages();
+        std::vector<std::string> getChoiceMessagesNumbered();
         std::vector<std::string> printChoiceMessages();
+        std::vector<std::string> printChoiceMessagesNumbered();
+
         bool isDone();
         
         int addNode(std::string message, std::string speaker);

@@ -32,8 +32,16 @@ namespace rpgDialogue {
         return current_->getChoiceMessages();
     }
 
+    std::vector<std::string> Dialogue::getChoiceMessagesNumbered() {
+        return current_->getChoiceMessagesNumbered();
+    }
+
     std::vector<std::string> Dialogue::printChoiceMessages() {
         return current_->printChoiceMessages();
+    }
+
+    std::vector<std::string> Dialogue::printChoiceMessagesNumbered() {
+        return current_->printChoiceMessagesNumbered();
     }
 
     bool Dialogue::isDone() {
