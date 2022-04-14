@@ -137,12 +137,35 @@ TEST(testNode, testGetChoiceMessages) {
     ASSERT_EQ(testNode.getChoiceMessages(), expected);
 }
 
+TEST(testNode, testGetChoiceMessagesNumbered) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "speaker");
+    Node choiceNode1 = Node("no", "speaker");
+    Node choiceNode2 = Node("maybe", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    std::vector<std::string> expected = {"0) yes", "1) no", "2) maybe"};
+
+    ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
+}
+
 TEST(testNode, testGetChoiceMessagesEmpty) {
     Node testNode = Node("message", "speaker");
 
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testNode.getChoiceMessages(), expected);
+}
+
+TEST(testNode, testGetChoiceMessagesNumberedEmpty) {
+    Node testNode = Node("message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
 }
 
 TEST(testNode, testGetChoiceMessagesEnd) {
@@ -161,6 +184,22 @@ TEST(testNode, testGetChoiceMessagesEnd) {
     ASSERT_EQ(testNode.getChoiceMessages(), expected);
 }
 
+TEST(testNode, testGetChoiceMessagesNumberedEnd) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "speaker");
+    Node choiceNode1 = Node("no", "speaker");
+    Node choiceNode2 = Node("maybe", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::string> expected = {"0) yes", "1) no", "2) maybe", "3) [END]"};
+
+    ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
+}
+
 TEST(testNode, testPrintChoiceMessages) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("yes", "sneaker");
@@ -176,12 +215,35 @@ TEST(testNode, testPrintChoiceMessages) {
     ASSERT_EQ(testNode.printChoiceMessages(), expected);
 }
 
+TEST(testNode, testPrintChoiceMessagesNumbered) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "sneaker");
+    Node choiceNode1 = Node("no", "you");
+    Node choiceNode2 = Node("maybe", "idk");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    std::vector<std::string> expected = {"0) sneaker: yes", "1) you: no", "2) idk: maybe"};
+
+    ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
+}
+
 TEST(testNode, testPrintChoiceMessagesEmpty) {
     Node testNode = Node("message", "speaker");
 
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testNode.printChoiceMessages(), expected);
+}
+
+TEST(testNode, testPrintChoiceMessagesNumberedEmpty) {
+    Node testNode = Node("message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
 }
 
 TEST(testNode, testPrintChoiceMessagesEnd) {
@@ -198,6 +260,22 @@ TEST(testNode, testPrintChoiceMessagesEnd) {
     std::vector<std::string> expected = {"sneaker: yes", "you: no", "idk: maybe", "[END]"};
 
     ASSERT_EQ(testNode.printChoiceMessages(), expected);
+}
+
+TEST(testNode, testPrintChoiceMessagesNumberedEnd) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "sneaker");
+    Node choiceNode1 = Node("no", "you");
+    Node choiceNode2 = Node("maybe", "idk");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::string> expected = {"0) sneaker: yes", "1) you: no", "2) idk: maybe", "3) [END]"};
+
+    ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
 }
 
 #endif
