@@ -37,31 +37,25 @@ int main() {
 
     merchantDialogue.addTerminalChoice(6);
 
-    
+    // merchantDialogue.reset();
 
-    merchantDialogue.reset();
-    std::string a("hello world");
-    std::cout << a.max_size() << std::endl;
-    std::cout << merchantDialogue.printMessage() << std::endl;
 
-    // while (!merchantDialogue.isDone()) {
-    //     std::cout << "checkpoint1" << std::endl;
-    //     std::cout << merchantDialogue.getNodeCount() << std::endl;
-    //     std::cout << merchantDialogue.getMessage() << std::endl;
+    while (!merchantDialogue.isDone()) {
+        std::cout << merchantDialogue.printMessage() << std::endl;
 
-    //     if (merchantDialogue.getChoiceCount() > 1) {
-    //         for (auto line : merchantDialogue.getChoiceMessages()) {
-    //             std::cout << line << std::endl;
-    //         }
+        if (merchantDialogue.getChoiceCount() > 1) {
+            auto choices = merchantDialogue.printChoiceMessages();
+            for (int i = 0; i < choices.size(); i++) {
+                std::cout << i << ") " << choices[i] << std::endl;
+            }
 
-    //         std::cin >> choice;
-    //         merchantDialogue.makeChoice(choice); 
-    //     }
-    //     else {
-    //         merchantDialogue.makeChoice(0);
-    //     }
-    // }
+            std::cin >> choice;
+            merchantDialogue.makeChoice(choice); 
+        }
+        else {
+            merchantDialogue.makeChoice(0);
+        }
+    }
 
-    std::cout << "Hello world!" << std::endl;
     return 0;
 }
