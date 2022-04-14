@@ -1,4 +1,5 @@
-#include "dialogue.hpp"
+#include "../include/dialogue.hpp"
+
 
 namespace rpgDialogue {
     Dialogue::Dialogue(std::string headMessage, std::string speaker) {

@@ -2,7 +2,7 @@
 #include <iterator>
 #include <ostream>
 #include <string>
-#include "../../src/dialogue.hpp"
+#include "../../include/dialogue.hpp"
 
 
 using namespace rpgDialogue;

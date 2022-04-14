@@ -2,7 +2,7 @@
 #define TEST_DIALOGUE_HPP
 
 #include <gtest/gtest.h>
-#include "../src/dialogue.hpp"
+#include "../include/dialogue.hpp"
 
 
 using namespace rpgDialogue;

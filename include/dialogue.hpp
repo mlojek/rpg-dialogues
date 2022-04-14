@@ -2,9 +2,10 @@
 #define DIALOGUE_HPP
 
 
-#include "node.hpp"
+#include "../src/node.hpp"
 #include <string>
 #include <vector>
+
 
 namespace rpgDialogue {
     class Dialogue {
