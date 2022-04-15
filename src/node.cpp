@@ -20,7 +20,7 @@ namespace rpgDialogue {
 
     Node* Node::getNext(int choiceNo) {
         if (choiceNo >= nextNodes_.size() || choiceNo < 0)
-            return nullptr;
+            return this;
         else
             return nextNodes_[choiceNo];
     }

@@ -93,7 +93,7 @@ TEST(testNode, testGetNext) {
 TEST(testNode, testGetNextNoChoices) {
     Node testNode = Node("message", "speaker");
 
-    ASSERT_EQ(testNode.getNext(0), nullptr);
+    ASSERT_EQ(testNode.getNext(0), &testNode);
 }
 
 TEST(testNode, testGetNextOutOfRange) {
@@ -106,7 +106,7 @@ TEST(testNode, testGetNextOutOfRange) {
     testNode.addChoice(&choiceNode1);
     testNode.addChoice(&choiceNode2);
 
-    ASSERT_EQ(testNode.getNext(3), nullptr);
+    ASSERT_EQ(testNode.getNext(3), &testNode);
 }
 
 TEST(testNode, testGetNextNegativeIndex) {
@@ -119,7 +119,7 @@ TEST(testNode, testGetNextNegativeIndex) {
     testNode.addChoice(&choiceNode1);
     testNode.addChoice(&choiceNode2);
 
-    ASSERT_EQ(testNode.getNext(-1), nullptr);
+    ASSERT_EQ(testNode.getNext(-1), &testNode);
 }
 
 TEST(testNode, testGetChoiceMessages) {
