@@ -6,15 +6,15 @@
 namespace rpgDialogue {
     Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker) {}
 
-    std::string Node::getMessage() {
+    std::string Node::getMessage() const {
         return message_;
     }
 
-    std::string Node::getSpeaker() {
+    std::string Node::getSpeaker() const {
         return speaker_;
     }
 
-    int Node::getChoiceCount() {
+    int Node::getChoiceCount() const {
         return nextNodes_.size();
     }
 
@@ -25,7 +25,7 @@ namespace rpgDialogue {
             return nextNodes_[choiceNo];
     }
 
-    std::vector<std::string> Node::getChoiceMessages() {
+    std::vector<std::string> Node::getChoiceMessages() const {
         std::vector<std::string> result;
 
         for (auto choice : nextNodes_) {
@@ -38,7 +38,7 @@ namespace rpgDialogue {
         return result;
     }
 
-    std::vector<std::string> Node::getChoiceMessagesNumbered() {
+    std::vector<std::string> Node::getChoiceMessagesNumbered() const {
         std::vector<std::string> result;
         int iter = 0;
 
@@ -54,11 +54,11 @@ namespace rpgDialogue {
         return result;
     }
 
-    std::string Node::printMessage() {
+    std::string Node::printMessage() const {
         return speaker_ + ": " + message_;
     }
 
-    std::vector<std::string> Node::printChoiceMessages() {
+    std::vector<std::string> Node::printChoiceMessages() const {
         std::vector<std::string> result;
 
         for (auto choice : nextNodes_) {
@@ -71,7 +71,7 @@ namespace rpgDialogue {
         return result;
     }
 
-    std::vector<std::string> Node::printChoiceMessagesNumbered() {
+    std::vector<std::string> Node::printChoiceMessagesNumbered() const {
         std::vector<std::string> result;
         int iter = 0;
 

@@ -16,16 +16,16 @@ namespace rpgDialogue {
     public:
         Node(std::string message, std::string speaker);
 
-        std::string getMessage();
-        std::string getSpeaker();
-        int getChoiceCount();
+        std::string getMessage() const;
+        std::string getSpeaker() const;
+        int getChoiceCount() const;
         Node* getNext(int choiceNo);
-        std::vector<std::string> getChoiceMessages();
-        std::vector<std::string> getChoiceMessagesNumbered();
+        std::vector<std::string> getChoiceMessages() const;
+        std::vector<std::string> getChoiceMessagesNumbered() const;
 
-        std::string printMessage();
-        std::vector<std::string> printChoiceMessages();
-        std::vector<std::string> printChoiceMessagesNumbered();
+        std::string printMessage() const;
+        std::vector<std::string> printChoiceMessages() const;
+        std::vector<std::string> printChoiceMessagesNumbered() const;
 
         void setMessage(std::string newMessage);
         void setSpeaker(std::string newSpeaker);
