@@ -17,17 +17,17 @@ namespace rpgDialogue {
     public:
         Dialogue(std::string headMessage, std::string speaker);
 
-        int getNodeCount();
-        int getChoiceCount();
-        std::string getMessage();
-        std::string getSpeaker();
-        std::string printMessage();
-        std::vector<std::string> getChoiceMessages();
-        std::vector<std::string> getChoiceMessagesNumbered();
-        std::vector<std::string> printChoiceMessages();
-        std::vector<std::string> printChoiceMessagesNumbered();
+        int getNodeCount() const;
+        int getChoiceCount() const;
+        std::string getMessage() const;
+        std::string getSpeaker() const;
+        std::string printMessage() const;
+        std::vector<std::string> getChoiceMessages() const;
+        std::vector<std::string> getChoiceMessagesNumbered() const;
+        std::vector<std::string> printChoiceMessages() const;
+        std::vector<std::string> printChoiceMessagesNumbered() const;
 
-        bool isDone();
+        bool isDone() const;
         
         int addNode(std::string message, std::string speaker);
 

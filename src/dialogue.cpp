@@ -8,43 +8,43 @@ namespace rpgDialogue {
         reset();
     }
 
-    int Dialogue::getNodeCount() {
+    int Dialogue::getNodeCount() const {
         return nodes_.size();
     }
 
-    int Dialogue::getChoiceCount() {
+    int Dialogue::getChoiceCount() const {
         return current_->getChoiceCount();
     }
 
-    std::string Dialogue::getMessage() {
+    std::string Dialogue::getMessage() const {
         return current_->getMessage();
     }
 
-    std::string Dialogue::getSpeaker() {
+    std::string Dialogue::getSpeaker() const {
         return current_->getSpeaker();
     }
 
-    std::string Dialogue::printMessage() {
+    std::string Dialogue::printMessage() const {
         return current_->printMessage();
     }
 
-    std::vector<std::string> Dialogue::getChoiceMessages() {
+    std::vector<std::string> Dialogue::getChoiceMessages() const {
         return current_->getChoiceMessages();
     }
 
-    std::vector<std::string> Dialogue::getChoiceMessagesNumbered() {
+    std::vector<std::string> Dialogue::getChoiceMessagesNumbered() const {
         return current_->getChoiceMessagesNumbered();
     }
 
-    std::vector<std::string> Dialogue::printChoiceMessages() {
+    std::vector<std::string> Dialogue::printChoiceMessages() const {
         return current_->printChoiceMessages();
     }
 
-    std::vector<std::string> Dialogue::printChoiceMessagesNumbered() {
+    std::vector<std::string> Dialogue::printChoiceMessagesNumbered() const {
         return current_->printChoiceMessagesNumbered();
     }
 
-    bool Dialogue::isDone() {
+    bool Dialogue::isDone() const {
         return current_ == nullptr;
     }
 
