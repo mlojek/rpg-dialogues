@@ -16,6 +16,7 @@ TEST(testNode, testConstructor) {
     ASSERT_EQ(testNode.getMessage(), "Node message.");
     ASSERT_EQ(testNode.getSpeaker(), "Node speaker");
     ASSERT_EQ(testNode.getChoiceCount(), 0);
+    ASSERT_EQ(testNode.isVisited(), false);
 }
 
 TEST(testNode, testSetMessage) {
@@ -32,6 +33,14 @@ TEST(testNode, testSetSpeaker) {
     testNode.setSpeaker("new speaker");
 
     ASSERT_EQ(testNode.getSpeaker(), "new speaker");
+}
+
+TEST(testNode, testSetVisited) {
+    Node testNode = Node("message", "speaker");
+
+    testNode.setVisited(true);
+
+    ASSERT_EQ(testNode.isVisited(), true);
 }
 
 TEST(testNode, testPrintMessage) {
@@ -120,6 +129,38 @@ TEST(testNode, testGetNextNegativeIndex) {
     testNode.addChoice(&choiceNode2);
 
     ASSERT_EQ(testNode.getNext(-1), &testNode);
+}
+
+TEST(testNode, testGetNextVisitedAllDefault) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    std::vector<bool> expected = {false, false, false};
+
+    ASSERT_EQ(testNode.getNextVisited(), expected);
+}
+
+TEST(testNode, testGetNextVisited) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    choiceNode1.setVisited(true);
+
+    std::vector<bool> expected = {false, true, false};
+
+    ASSERT_EQ(testNode.getNextVisited(), expected);
 }
 
 TEST(testNode, testGetChoiceMessages) {
