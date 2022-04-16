@@ -1,5 +1,7 @@
 #include "node.hpp"
 #include <cstddef>
+#include <string>
+#include <tuple>
 #include <vector>
 
 
@@ -96,6 +98,26 @@ namespace rpgDialogue {
                 result.push_back(std::to_string(iter) + ") " + choice->printMessage());
 
             iter++;
+        }
+
+        return result;
+    }
+
+    std::vector<std::tuple<std::string, bool>> Node::getChoiceMessagesAndVisited() const {
+        std::vector<std::tuple<std::string, bool>> result;
+
+        for (Node* nextNode : nextNodes_) {
+            result.push_back({nextNode->getMessage(), nextNode->isVisited()});
+        }
+
+        return result;
+    }
+
+    std::vector<std::tuple<std::string, bool>> Node::printChoiceMessagesAndVisited() const {
+        std::vector<std::tuple<std::string, bool>> result;
+
+        for (Node* nextNode : nextNodes_) {
+            result.push_back({nextNode->printMessage(), nextNode->isVisited()});
         }
 
         return result;
