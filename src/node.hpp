@@ -21,6 +21,7 @@ namespace rpgDialogue {
         std::string getSpeaker() const;
         int getChoiceCount() const;
         Node* getNext(int choiceNo);
+        bool isVisited() const;
         std::vector<std::string> getChoiceMessages() const;
         std::vector<std::string> getChoiceMessagesNumbered() const;
 
@@ -31,6 +32,7 @@ namespace rpgDialogue {
         void setMessage(std::string newMessage);
         void setSpeaker(std::string newSpeaker);
         void addChoice(Node* nextNode);
+        void setVisited(bool newVal);
 
         void resetChoices();
     };

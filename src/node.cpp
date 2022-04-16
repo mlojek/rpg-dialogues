@@ -25,6 +25,10 @@ namespace rpgDialogue {
             return nextNodes_[choiceNo];
     }
 
+    bool Node::isVisited() const {
+        return visited_;
+    }
+
     std::vector<std::string> Node::getChoiceMessages() const {
         std::vector<std::string> result;
 
@@ -97,6 +101,10 @@ namespace rpgDialogue {
 
     void Node::addChoice(Node* nextNode) {
         nextNodes_.push_back(nextNode);
+    }
+
+    void Node::setVisited(bool newVal) {
+        visited_ = newVal;
     }
 
     void Node::resetChoices() {
