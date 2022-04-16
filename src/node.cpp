@@ -33,6 +33,16 @@ namespace rpgDialogue {
         return visited_;
     }
 
+    std::vector<bool> Node::getNextVisited() const {
+        std::vector<bool> result;
+
+        for (Node* nextNode : nextNodes_) {
+            result.push_back(nextNode->isVisited());
+        }
+
+        return result;
+    }
+
     std::vector<std::string> Node::getChoiceMessages() const {
         std::vector<std::string> result;
 

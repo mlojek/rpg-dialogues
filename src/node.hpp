@@ -24,6 +24,7 @@ namespace rpgDialogue {
         int getChoiceCount() const;
         Node* getNext(int choiceNo);
         bool isVisited() const;
+        std::vector<bool> getNextVisited() const;
 
         std::vector<std::string> getChoiceMessages() const;
         std::vector<std::string> getChoiceMessagesNumbered() const;
