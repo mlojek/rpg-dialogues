@@ -4,7 +4,7 @@
 
 
 namespace rpgDialogue {
-    Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker) {}
+    Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker), visited_(false) {}
 
     std::string Node::getMessage() const {
         return message_;

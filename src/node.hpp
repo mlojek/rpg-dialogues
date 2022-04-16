@@ -12,6 +12,7 @@ namespace rpgDialogue {
         std::string message_;
         std::string speaker_;
         std::vector<Node*> nextNodes_;
+        bool visited_;
 
     public:
         Node(std::string message, std::string speaker);
