@@ -14,6 +14,10 @@ namespace rpgDialogue {
         return speaker_;
     }
 
+    std::string Node::printMessage() const {
+        return speaker_ + ": " + message_;
+    }
+
     int Node::getChoiceCount() const {
         return nextNodes_.size();
     }
@@ -56,10 +60,6 @@ namespace rpgDialogue {
         }
 
         return result;
-    }
-
-    std::string Node::printMessage() const {
-        return speaker_ + ": " + message_;
     }
 
     std::vector<std::string> Node::printChoiceMessages() const {

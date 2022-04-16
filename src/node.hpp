@@ -19,13 +19,14 @@ namespace rpgDialogue {
 
         std::string getMessage() const;
         std::string getSpeaker() const;
+        std::string printMessage() const;
+
         int getChoiceCount() const;
         Node* getNext(int choiceNo);
         bool isVisited() const;
+
         std::vector<std::string> getChoiceMessages() const;
         std::vector<std::string> getChoiceMessagesNumbered() const;
-
-        std::string printMessage() const;
         std::vector<std::string> printChoiceMessages() const;
         std::vector<std::string> printChoiceMessagesNumbered() const;
 
