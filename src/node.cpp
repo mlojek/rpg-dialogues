@@ -107,7 +107,12 @@ namespace rpgDialogue {
         std::vector<std::tuple<std::string, bool>> result;
 
         for (Node* nextNode : nextNodes_) {
-            result.push_back({nextNode->getMessage(), nextNode->isVisited()});
+            if (nextNode == nullptr) {
+                result.push_back({"[END]", false});
+            }
+            else {
+                result.push_back({nextNode->getMessage(), nextNode->isVisited()});
+            }
         }
 
         return result;
@@ -117,7 +122,12 @@ namespace rpgDialogue {
         std::vector<std::tuple<std::string, bool>> result;
 
         for (Node* nextNode : nextNodes_) {
-            result.push_back({nextNode->printMessage(), nextNode->isVisited()});
+            if (nextNode == nullptr) {
+                result.push_back({"[END]", false});
+            }
+            else {
+                result.push_back({nextNode->printMessage(), nextNode->isVisited()});
+            }
         }
 
         return result;
