@@ -6,8 +6,9 @@
 
 
 namespace rpgDialogue {
-    Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker), visited_(false) {}
+    Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker), seen_(false) {}
 
+    // Message getters:
     std::string Node::getMessage() const {
         return message_;
     }
@@ -20,35 +21,40 @@ namespace rpgDialogue {
         return speaker_ + ": " + message_;
     }
 
-    int Node::getChoiceCount() const {
-        return nextNodes_.size();
+    // Message setters:
+    void Node::setMessage(std::string newMessage) {
+        message_ = newMessage;
     }
 
-    Node* Node::getNext(int choiceNo) {
-        if (choiceNo >= nextNodes_.size() || choiceNo < 0)
+    void Node::setSpeaker(std::string newSpeaker) {
+        speaker_ = newSpeaker;
+    }
+
+    // Choices manipulation:
+    void Node::addChoice(Node* nextNode) {
+        choices_.push_back(nextNode);
+    }
+
+    int Node::getChoiceCount() const {
+        return choices_.size();
+    }
+
+    Node* Node::makeChoice(int choiceNo) {
+        if (choiceNo >= choices_.size() || choiceNo < 0)
             return this;
         else
-            return nextNodes_[choiceNo];
+            return choices_[choiceNo];
     }
 
-    bool Node::isVisited() const {
-        return visited_;
+    void Node::clearChoices() {
+        choices_.clear();
     }
 
-    std::vector<bool> Node::getNextVisited() const {
-        std::vector<bool> result;
-
-        for (Node* nextNode : nextNodes_) {
-            result.push_back(nextNode->isVisited());
-        }
-
-        return result;
-    }
-
+    // Choice messages getters:
     std::vector<std::string> Node::getChoiceMessages() const {
         std::vector<std::string> result;
 
-        for (auto choice : nextNodes_) {
+        for (auto choice : choices_) {
             if (choice == nullptr)
                 result.push_back("[END]");
             else
@@ -62,7 +68,7 @@ namespace rpgDialogue {
         std::vector<std::string> result;
         int iter = 0;
 
-        for (auto choice : nextNodes_) {
+        for (auto choice : choices_) {
             if (choice == nullptr)
                 result.push_back(std::to_string(iter) + ") [END]");
             else
@@ -77,7 +83,7 @@ namespace rpgDialogue {
     std::vector<std::string> Node::printChoiceMessages() const {
         std::vector<std::string> result;
 
-        for (auto choice : nextNodes_) {
+        for (auto choice : choices_) {
             if (choice == nullptr)
                 result.push_back("[END]");
             else
@@ -91,7 +97,7 @@ namespace rpgDialogue {
         std::vector<std::string> result;
         int iter = 0;
 
-        for (auto choice : nextNodes_) {
+        for (auto choice : choices_) {
             if (choice == nullptr)
                 result.push_back(std::to_string(iter) + ") [END]");
             else
@@ -103,53 +109,52 @@ namespace rpgDialogue {
         return result;
     }
 
-    std::vector<std::tuple<std::string, bool>> Node::getChoiceMessagesAndVisited() const {
+    std::vector<std::tuple<std::string, bool>> Node::getChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (Node* nextNode : nextNodes_) {
+        for (Node* nextNode : choices_) {
             if (nextNode == nullptr) {
                 result.push_back({"[END]", false});
             }
             else {
-                result.push_back({nextNode->getMessage(), nextNode->isVisited()});
+                result.push_back({nextNode->getMessage(), nextNode->isSeen()});
             }
         }
 
         return result;
     }
 
-    std::vector<std::tuple<std::string, bool>> Node::printChoiceMessagesAndVisited() const {
+    std::vector<std::tuple<std::string, bool>> Node::printChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (Node* nextNode : nextNodes_) {
+        for (Node* nextNode : choices_) {
             if (nextNode == nullptr) {
                 result.push_back({"[END]", false});
             }
             else {
-                result.push_back({nextNode->printMessage(), nextNode->isVisited()});
+                result.push_back({nextNode->printMessage(), nextNode->isSeen()});
             }
         }
 
         return result;
     }
 
-    void Node::setMessage(std::string newMessage) {
-        message_ = newMessage;
+    // Seen info:
+    bool Node::isSeen() const {
+        return seen_;
     }
 
-    void Node::setSpeaker(std::string newSpeaker) {
-        speaker_ = newSpeaker;
+    void Node::setSeen(bool newVal) {
+        seen_ = newVal;
     }
 
-    void Node::addChoice(Node* nextNode) {
-        nextNodes_.push_back(nextNode);
-    }
+    std::vector<bool> Node::getChoicesSeen() const {
+        std::vector<bool> result;
 
-    void Node::setVisited(bool newVal) {
-        visited_ = newVal;
-    }
+        for (Node* nextNode : choices_) {
+            result.push_back(nextNode->isSeen());
+        }
 
-    void Node::resetChoices() {
-        nextNodes_.clear();
+        return result;
     }
 }
