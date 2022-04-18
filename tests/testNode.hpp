@@ -319,4 +319,46 @@ TEST(testNode, testPrintChoiceMessagesNumberedEnd) {
     ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
 }
 
+TEST(testNode, testGetChoiceMessagesAndVisited) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "sneaker");
+    Node choiceNode1 = Node("no", "you");
+    Node choiceNode2 = Node("maybe", "idk");
+
+    choiceNode1.setVisited(true);
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::tuple<std::string, bool>> expected = {{"yes", false}, 
+                                                           {"no", true},
+                                                           {"maybe", false},
+                                                           {"[END]", false}};
+
+    ASSERT_EQ(testNode.getChoiceMessagesAndVisited(), expected);
+}
+
+TEST(testNode, testprintChoiceMessagesAndVisited) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "sneaker");
+    Node choiceNode1 = Node("no", "you");
+    Node choiceNode2 = Node("maybe", "idk");
+
+    choiceNode1.setVisited(true);
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::tuple<std::string, bool>> expected = {{"sneaker: yes", false}, 
+                                                           {"you: no", true},
+                                                           {"idk: maybe", false},
+                                                           {"[END]", false}};
+
+    ASSERT_EQ(testNode.printChoiceMessagesAndVisited(), expected);
+}
+
 #endif
