@@ -56,7 +56,7 @@ namespace rpgDialogue {
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back("[END]");
+                result.push_back(END_MESSAGE);
             else
                 result.push_back(choice->getMessage());
         }
@@ -70,7 +70,7 @@ namespace rpgDialogue {
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back(std::to_string(iter) + ") [END]");
+                result.push_back(std::to_string(iter) + ") " + END_MESSAGE);
             else
                 result.push_back(std::to_string(iter) + ") " + choice->getMessage());
 
@@ -85,7 +85,7 @@ namespace rpgDialogue {
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back("[END]");
+                result.push_back(END_MESSAGE);
             else
                 result.push_back(choice->printMessage());
         }
@@ -99,7 +99,7 @@ namespace rpgDialogue {
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back(std::to_string(iter) + ") [END]");
+                result.push_back(std::to_string(iter) + ") " + END_MESSAGE);
             else
                 result.push_back(std::to_string(iter) + ") " + choice->printMessage());
 
@@ -114,7 +114,7 @@ namespace rpgDialogue {
 
         for (Node* nextNode : choices_) {
             if (nextNode == nullptr) {
-                result.push_back({"[END]", false});
+                result.push_back({END_MESSAGE, false});
             }
             else {
                 result.push_back({nextNode->getMessage(), nextNode->isSeen()});
@@ -129,7 +129,7 @@ namespace rpgDialogue {
 
         for (Node* nextNode : choices_) {
             if (nextNode == nullptr) {
-                result.push_back({"[END]", false});
+                result.push_back({END_MESSAGE, false});
             }
             else {
                 result.push_back({nextNode->printMessage(), nextNode->isSeen()});
