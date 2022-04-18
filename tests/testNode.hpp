@@ -9,16 +9,23 @@
 
 using namespace rpgDialogue;
 
-
-TEST(testNode, testConstructor) {
+TEST(testNode, testConstructorDefaults) {       
     Node testNode = Node("Node message.", "Node speaker");
 
     ASSERT_EQ(testNode.getMessage(), "Node message.");
     ASSERT_EQ(testNode.getSpeaker(), "Node speaker");
     ASSERT_EQ(testNode.getChoiceCount(), 0);
-    ASSERT_EQ(testNode.isVisited(), false);
+    ASSERT_EQ(testNode.isSeen(), false);
 }
 
+// Message getters:
+TEST(testNode, testPrintMessage) {
+    Node testNode = Node("message", "speaker");
+
+    ASSERT_EQ(testNode.printMessage(), "speaker: message");
+}
+
+// Message setters:
 TEST(testNode, testSetMessage) {
     Node testNode = Node("message", "speaker");
 
@@ -35,20 +42,7 @@ TEST(testNode, testSetSpeaker) {
     ASSERT_EQ(testNode.getSpeaker(), "new speaker");
 }
 
-TEST(testNode, testSetVisited) {
-    Node testNode = Node("message", "speaker");
-
-    testNode.setVisited(true);
-
-    ASSERT_EQ(testNode.isVisited(), true);
-}
-
-TEST(testNode, testPrintMessage) {
-    Node testNode = Node("message", "speaker");
-
-    ASSERT_EQ(testNode.printMessage(), "speaker: message");
-}
-
+// Choices manipulation:
 TEST(testNode, testAddChoice) {
     Node testNode = Node("message", "speaker");
     Node choiceNode = Node("message", "speaker");
@@ -71,7 +65,7 @@ TEST(testNode, testAddThreeChoices) {
     ASSERT_EQ(testNode.getChoiceCount(), 3);
 }
 
-TEST(testNode, testResetChoices) {
+TEST(testNode, testMakeChoice) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("message", "speaker");
     Node choiceNode1 = Node("message", "speaker");
@@ -81,88 +75,57 @@ TEST(testNode, testResetChoices) {
     testNode.addChoice(&choiceNode1);
     testNode.addChoice(&choiceNode2);
 
-    testNode.resetChoices();
+    ASSERT_EQ(testNode.makeChoice(1), &choiceNode1);
+}
+
+TEST(testNode, testMakeChoiceNoChoices) {
+    Node testNode = Node("message", "speaker");
+
+    ASSERT_EQ(testNode.makeChoice(0), &testNode);
+}
+
+TEST(testNode, testMakeChoiceOutOfRange) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    ASSERT_EQ(testNode.makeChoice(3), &testNode);
+}
+
+TEST(testNode, testMakeChoiceNegativeIndex) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    ASSERT_EQ(testNode.makeChoice(-4), &testNode);
+}
+
+TEST(testNode, testClearChoices) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    testNode.clearChoices();
 
     ASSERT_EQ(testNode.getChoiceCount(), 0);
 }
 
-TEST(testNode, testGetNext) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("message", "speaker");
-    Node choiceNode1 = Node("message", "speaker");
-    Node choiceNode2 = Node("message", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-
-    ASSERT_EQ(testNode.getNext(0), &choiceNode0);
-}
-
-TEST(testNode, testGetNextNoChoices) {
-    Node testNode = Node("message", "speaker");
-
-    ASSERT_EQ(testNode.getNext(0), &testNode);
-}
-
-TEST(testNode, testGetNextOutOfRange) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("message", "speaker");
-    Node choiceNode1 = Node("message", "speaker");
-    Node choiceNode2 = Node("message", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-
-    ASSERT_EQ(testNode.getNext(3), &testNode);
-}
-
-TEST(testNode, testGetNextNegativeIndex) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("message", "speaker");
-    Node choiceNode1 = Node("message", "speaker");
-    Node choiceNode2 = Node("message", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-
-    ASSERT_EQ(testNode.getNext(-1), &testNode);
-}
-
-TEST(testNode, testGetNextVisitedAllDefault) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("message", "speaker");
-    Node choiceNode1 = Node("message", "speaker");
-    Node choiceNode2 = Node("message", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-
-    std::vector<bool> expected = {false, false, false};
-
-    ASSERT_EQ(testNode.getNextVisited(), expected);
-}
-
-TEST(testNode, testGetNextVisited) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("message", "speaker");
-    Node choiceNode1 = Node("message", "speaker");
-    Node choiceNode2 = Node("message", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-
-    choiceNode1.setVisited(true);
-
-    std::vector<bool> expected = {false, true, false};
-
-    ASSERT_EQ(testNode.getNextVisited(), expected);
-}
-
+// Choice messages getters:
 TEST(testNode, testGetChoiceMessages) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("yes", "speaker");
@@ -174,6 +137,30 @@ TEST(testNode, testGetChoiceMessages) {
     testNode.addChoice(&choiceNode2);
 
     std::vector<std::string> expected = {"yes", "no", "maybe"};
+
+    ASSERT_EQ(testNode.getChoiceMessages(), expected);
+}
+
+TEST(testNode, testGetChoiceMessagesEmpty) {
+    Node testNode = Node("message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testNode.getChoiceMessages(), expected);
+}
+
+TEST(testNode, testGetChoiceMessagesEnd) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "speaker");
+    Node choiceNode1 = Node("no", "speaker");
+    Node choiceNode2 = Node("maybe", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::string> expected = {"yes", "no", "maybe", END_MESSAGE};
 
     ASSERT_EQ(testNode.getChoiceMessages(), expected);
 }
@@ -193,36 +180,12 @@ TEST(testNode, testGetChoiceMessagesNumbered) {
     ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
 }
 
-TEST(testNode, testGetChoiceMessagesEmpty) {
-    Node testNode = Node("message", "speaker");
-
-    std::vector<std::string> expected = {};
-
-    ASSERT_EQ(testNode.getChoiceMessages(), expected);
-}
-
 TEST(testNode, testGetChoiceMessagesNumberedEmpty) {
     Node testNode = Node("message", "speaker");
 
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
-}
-
-TEST(testNode, testGetChoiceMessagesEnd) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("yes", "speaker");
-    Node choiceNode1 = Node("no", "speaker");
-    Node choiceNode2 = Node("maybe", "speaker");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-    testNode.addChoice(nullptr);
-
-    std::vector<std::string> expected = {"yes", "no", "maybe", "[END]"};
-
-    ASSERT_EQ(testNode.getChoiceMessages(), expected);
 }
 
 TEST(testNode, testGetChoiceMessagesNumberedEnd) {
@@ -236,7 +199,7 @@ TEST(testNode, testGetChoiceMessagesNumberedEnd) {
     testNode.addChoice(&choiceNode2);
     testNode.addChoice(nullptr);
 
-    std::vector<std::string> expected = {"0) yes", "1) no", "2) maybe", "3) [END]"};
+    std::vector<std::string> expected = {"0) yes", "1) no", "2) maybe", "3) " + END_MESSAGE};
 
     ASSERT_EQ(testNode.getChoiceMessagesNumbered(), expected);
 }
@@ -256,6 +219,30 @@ TEST(testNode, testPrintChoiceMessages) {
     ASSERT_EQ(testNode.printChoiceMessages(), expected);
 }
 
+TEST(testNode, testPrintChoiceMessagesEmpty) {
+    Node testNode = Node("message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testNode.printChoiceMessages(), expected);
+}
+
+TEST(testNode, testPrintChoiceMessagesEnd) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("yes", "sneaker");
+    Node choiceNode1 = Node("no", "you");
+    Node choiceNode2 = Node("maybe", "idk");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<std::string> expected = {"sneaker: yes", "you: no", "idk: maybe", END_MESSAGE};
+
+    ASSERT_EQ(testNode.printChoiceMessages(), expected);
+}
+
 TEST(testNode, testPrintChoiceMessagesNumbered) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("yes", "sneaker");
@@ -271,36 +258,12 @@ TEST(testNode, testPrintChoiceMessagesNumbered) {
     ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
 }
 
-TEST(testNode, testPrintChoiceMessagesEmpty) {
-    Node testNode = Node("message", "speaker");
-
-    std::vector<std::string> expected = {};
-
-    ASSERT_EQ(testNode.printChoiceMessages(), expected);
-}
-
 TEST(testNode, testPrintChoiceMessagesNumberedEmpty) {
     Node testNode = Node("message", "speaker");
 
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
-}
-
-TEST(testNode, testPrintChoiceMessagesEnd) {
-    Node testNode = Node("message", "speaker");
-    Node choiceNode0 = Node("yes", "sneaker");
-    Node choiceNode1 = Node("no", "you");
-    Node choiceNode2 = Node("maybe", "idk");
-
-    testNode.addChoice(&choiceNode0);
-    testNode.addChoice(&choiceNode1);
-    testNode.addChoice(&choiceNode2);
-    testNode.addChoice(nullptr);
-
-    std::vector<std::string> expected = {"sneaker: yes", "you: no", "idk: maybe", "[END]"};
-
-    ASSERT_EQ(testNode.printChoiceMessages(), expected);
 }
 
 TEST(testNode, testPrintChoiceMessagesNumberedEnd) {
@@ -314,18 +277,18 @@ TEST(testNode, testPrintChoiceMessagesNumberedEnd) {
     testNode.addChoice(&choiceNode2);
     testNode.addChoice(nullptr);
 
-    std::vector<std::string> expected = {"0) sneaker: yes", "1) you: no", "2) idk: maybe", "3) [END]"};
+    std::vector<std::string> expected = {"0) sneaker: yes", "1) you: no", "2) idk: maybe", "3) " + END_MESSAGE};
 
     ASSERT_EQ(testNode.printChoiceMessagesNumbered(), expected);
 }
 
-TEST(testNode, testGetChoiceMessagesAndVisited) {
+TEST(testNode, testGetChoicesInfo) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("yes", "sneaker");
     Node choiceNode1 = Node("no", "you");
     Node choiceNode2 = Node("maybe", "idk");
 
-    choiceNode1.setVisited(true);
+    choiceNode1.setSeen(true);
 
     testNode.addChoice(&choiceNode0);
     testNode.addChoice(&choiceNode1);
@@ -335,18 +298,18 @@ TEST(testNode, testGetChoiceMessagesAndVisited) {
     std::vector<std::tuple<std::string, bool>> expected = {{"yes", false}, 
                                                            {"no", true},
                                                            {"maybe", false},
-                                                           {"[END]", false}};
+                                                           {END_MESSAGE, false}};
 
-    ASSERT_EQ(testNode.getChoiceMessagesAndVisited(), expected);
+    ASSERT_EQ(testNode.getChoicesInfo(), expected);
 }
 
-TEST(testNode, testprintChoiceMessagesAndVisited) {
+TEST(testNode, testPrintChoicesInfo) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("yes", "sneaker");
     Node choiceNode1 = Node("no", "you");
     Node choiceNode2 = Node("maybe", "idk");
 
-    choiceNode1.setVisited(true);
+    choiceNode1.setSeen(true);
 
     testNode.addChoice(&choiceNode0);
     testNode.addChoice(&choiceNode1);
@@ -356,9 +319,53 @@ TEST(testNode, testprintChoiceMessagesAndVisited) {
     std::vector<std::tuple<std::string, bool>> expected = {{"sneaker: yes", false}, 
                                                            {"you: no", true},
                                                            {"idk: maybe", false},
-                                                           {"[END]", false}};
+                                                           {END_MESSAGE, false}};
 
-    ASSERT_EQ(testNode.printChoiceMessagesAndVisited(), expected);
+    ASSERT_EQ(testNode.printChoicesInfo(), expected);
 }
+
+// Seen info:
+TEST(testNode, testSetVisited) {
+    Node testNode = Node("message", "speaker");
+
+    testNode.setSeen(true);
+
+    ASSERT_EQ(testNode.isSeen(), true);
+}
+
+TEST(testNode, testGetChoicesSeen) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+
+    choiceNode1.setSeen(true);
+    choiceNode2.setSeen(true);
+
+    std::vector<bool> expected = {false, true, true};
+
+    ASSERT_EQ(testNode.getChoicesSeen(), expected);
+}
+
+TEST(testNode, testGetChoicesSeenDefault) {
+    Node testNode = Node("message", "speaker");
+    Node choiceNode0 = Node("message", "speaker");
+    Node choiceNode1 = Node("message", "speaker");
+    Node choiceNode2 = Node("message", "speaker");
+
+    testNode.addChoice(&choiceNode0);
+    testNode.addChoice(&choiceNode1);
+    testNode.addChoice(&choiceNode2);
+    testNode.addChoice(nullptr);
+
+    std::vector<bool> expected = {false, false, false, false};
+
+    ASSERT_EQ(testNode.getChoicesSeen(), expected);
+}
+
 
 #endif
