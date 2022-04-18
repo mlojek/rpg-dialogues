@@ -152,7 +152,12 @@ namespace rpgDialogue {
         std::vector<bool> result;
 
         for (auto choice : choices_) {
-            result.push_back(choice->isSeen());
+            if (choice == nullptr) {
+                result.push_back(false);
+            }
+            else {
+                result.push_back(choice->isSeen());
+            }
         }
 
         return result;
