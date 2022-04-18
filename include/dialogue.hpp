@@ -25,14 +25,14 @@ namespace rpgDialogue {
         void linkNodes(unsigned nodeIndex0, unsigned nodeIndex1);
         void addTerminalChoice(unsigned nodeIndex);
 
-        // Current choices info:
-        int getChoiceCount() const;
-        std::vector<bool> getChoicesSeen() const;
-
         // Current message getters:
         std::string getMessage() const;
         std::string getSpeaker() const;
         std::string printMessage() const;
+
+        // Current choices info:
+        int getChoiceCount() const;
+        std::vector<bool> getChoicesSeen() const;
 
         // Current choice messages getters:
         std::vector<std::string> getChoiceMessages() const;
