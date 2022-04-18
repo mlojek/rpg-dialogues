@@ -38,14 +38,13 @@ namespace rpgDialogue {
         std::vector<std::string> getChoiceMessagesNumbered() const;
         std::vector<std::string> printChoiceMessages() const;
         std::vector<std::string> printChoiceMessagesNumbered() const;
-        // These two are just grabage names
-        std::vector<std::tuple<std::string, bool>> getChoiceMessagesAndVisited() const;
-        std::vector<std::tuple<std::string, bool>> printChoiceMessagesAndVisited() const;
+        std::vector<std::tuple<std::string, bool>> getChoicesInfo() const;
+        std::vector<std::tuple<std::string, bool>> printChoicesInfo() const;
 
-        // Visited info:
+        // Seen info:
         bool isSeen() const;
         void setSeen(bool newVal);
-        std::vector<bool> getNextVisited() const;       // rename asap
+        std::vector<bool> getChoicesSeen() const;
     };
 }
 
