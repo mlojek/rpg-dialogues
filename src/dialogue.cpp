@@ -47,6 +47,7 @@ namespace rpgDialogue {
     std::vector<std::tuple<std::string, bool>> Dialogue::getChoiceMessagesAndVisited() const {
         return current_->getChoiceMessagesAndVisited();
     }
+    
     std::vector<std::tuple<std::string, bool>> Dialogue::printChoiceMessagesAndVisited() const {
         return current_->printChoiceMessagesAndVisited();
     }
