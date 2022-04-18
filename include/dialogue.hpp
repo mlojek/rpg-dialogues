@@ -27,7 +27,12 @@ namespace rpgDialogue {
         std::vector<std::string> printChoiceMessages() const;
         std::vector<std::string> printChoiceMessagesNumbered() const;
 
+        std::vector<std::tuple<std::string, bool>> getChoiceMessagesAndVisited() const;
+        std::vector<std::tuple<std::string, bool>> printChoiceMessagesAndVisited() const;
+
         bool isDone() const;
+
+        std::vector<bool> getNextVisited() const;
         
         int addNode(std::string message, std::string speaker);
 

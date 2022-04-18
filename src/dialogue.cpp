@@ -44,8 +44,19 @@ namespace rpgDialogue {
         return current_->printChoiceMessagesNumbered();
     }
 
+    std::vector<std::tuple<std::string, bool>> Dialogue::getChoiceMessagesAndVisited() const {
+        return current_->getChoiceMessagesAndVisited();
+    }
+    std::vector<std::tuple<std::string, bool>> Dialogue::printChoiceMessagesAndVisited() const {
+        return current_->printChoiceMessagesAndVisited();
+    }
+
     bool Dialogue::isDone() const {
         return current_ == nullptr;
+    }
+
+    std::vector<bool> Dialogue::getNextVisited() const {
+        return current_->getNextVisited();
     }
 
     int Dialogue::addNode(std::string message, std::string speaker) {
@@ -65,9 +76,16 @@ namespace rpgDialogue {
 
     void Dialogue::makeChoice(unsigned choiceNo) {
         current_ = current_->getNext(choiceNo);
+        current_->setVisited(true);
     }
 
     void Dialogue::reset() {
         current_ = head_;
+
+        for (auto node : nodes_) {
+            node.setVisited(false);
+        }
+
+        head_->setVisited(true);
     }
 }
