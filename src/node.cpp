@@ -66,15 +66,15 @@ namespace rpgDialogue {
 
     std::vector<std::string> Node::getChoiceMessagesNumbered() const {
         std::vector<std::string> result;
-        int iter = 0;
+        int index = 0;
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back(std::to_string(iter) + ") " + END_MESSAGE);
+                result.push_back(std::to_string(index) + ") " + END_MESSAGE);
             else
-                result.push_back(std::to_string(iter) + ") " + choice->getMessage());
+                result.push_back(std::to_string(index) + ") " + choice->getMessage());
 
-            iter++;
+            index++;
         }
 
         return result;
@@ -95,15 +95,15 @@ namespace rpgDialogue {
 
     std::vector<std::string> Node::printChoiceMessagesNumbered() const {
         std::vector<std::string> result;
-        int iter = 0;
+        int index = 0;
 
         for (auto choice : choices_) {
             if (choice == nullptr)
-                result.push_back(std::to_string(iter) + ") " + END_MESSAGE);
+                result.push_back(std::to_string(index) + ") " + END_MESSAGE);
             else
-                result.push_back(std::to_string(iter) + ") " + choice->printMessage());
+                result.push_back(std::to_string(index) + ") " + choice->printMessage());
 
-            iter++;
+            index++;
         }
 
         return result;
@@ -112,12 +112,12 @@ namespace rpgDialogue {
     std::vector<std::tuple<std::string, bool>> Node::getChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (Node* nextNode : choices_) {
-            if (nextNode == nullptr) {
+        for (auto choice : choices_) {
+            if (choice == nullptr) {
                 result.push_back({END_MESSAGE, false});
             }
             else {
-                result.push_back({nextNode->getMessage(), nextNode->isSeen()});
+                result.push_back({choice->getMessage(), choice->isSeen()});
             }
         }
 
@@ -127,12 +127,12 @@ namespace rpgDialogue {
     std::vector<std::tuple<std::string, bool>> Node::printChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (Node* nextNode : choices_) {
-            if (nextNode == nullptr) {
+        for (auto choice : choices_) {
+            if (choice == nullptr) {
                 result.push_back({END_MESSAGE, false});
             }
             else {
-                result.push_back({nextNode->printMessage(), nextNode->isSeen()});
+                result.push_back({choice->printMessage(), choice->isSeen()});
             }
         }
 
@@ -151,8 +151,8 @@ namespace rpgDialogue {
     std::vector<bool> Node::getChoicesSeen() const {
         std::vector<bool> result;
 
-        for (Node* nextNode : choices_) {
-            result.push_back(nextNode->isSeen());
+        for (auto choice : choices_) {
+            result.push_back(choice->isSeen());
         }
 
         return result;
