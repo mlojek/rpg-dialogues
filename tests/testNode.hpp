@@ -110,6 +110,14 @@ TEST(testNode, testMakeChoiceNegativeIndex) {
     ASSERT_EQ(testNode.makeChoice(-4), &testNode);
 }
 
+TEST(testNode, testMakeChoiceTerminalChoice) {
+    Node testNode = Node("message", "speaker");
+
+    testNode.addChoice(nullptr);
+
+    ASSERT_EQ(testNode.makeChoice(0), nullptr);
+}
+
 TEST(testNode, testClearChoices) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("message", "speaker");
