@@ -172,6 +172,17 @@ TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
 }
 
 // Navigating and playing the dialogue:
+TEST(testDialogue, testMakeChoiceCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.makeChoice(0);
+}
+
 TEST(testDialogue, testMakeChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
