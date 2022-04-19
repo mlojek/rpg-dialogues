@@ -111,12 +111,11 @@ namespace rpgDialogue {
 
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
-        // TODO 97 check if not nullptr
-        current_ = current_->makeChoice(choiceNo);
+        if (current_ != nullptr)
+            current_ = current_->makeChoice(choiceNo);
         
-        if (current_ != nullptr) {
+        if (current_ != nullptr)
             current_->setSeen(true);
-        }
     }
 
     bool Dialogue::isDone() const {
