@@ -65,6 +65,14 @@ TEST(testNode, testAddThreeChoices) {
     ASSERT_EQ(testNode.getChoiceCount(), 3);
 }
 
+TEST(testNode, testAddChoiceItself) {
+    Node testNode = Node("message", "speaker");
+
+    testNode.addChoice(&testNode);
+
+    ASSERT_EQ(testNode.getChoiceCount(), 0);
+}
+
 TEST(testNode, testMakeChoice) {
     Node testNode = Node("message", "speaker");
     Node choiceNode0 = Node("message", "speaker");
