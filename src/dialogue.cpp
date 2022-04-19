@@ -11,9 +11,9 @@ namespace rpgDialogue {
     // Nodes manipulation:
     int Dialogue::addNode(std::string message, std::string speaker) {
         nodes_.push_back(Node(message, speaker));
-        head_ = &nodes_[0];     // nodes vector moved, move head pointer
-        reset();                // move current pointer for the same reason
-        return nodes_.size() - 1;
+        head_ = &nodes_[0];         // nodes vector moved, move head pointer
+        reset();                    // move current pointer for the same reason
+        return nodes_.size() - 1;   // return index of the added node
     }
 
     int Dialogue::getNodeCount() const {
@@ -26,7 +26,8 @@ namespace rpgDialogue {
     }
 
     void Dialogue::addTerminalChoice(unsigned nodeIndex) {
-        nodes_[nodeIndex].addChoice(nullptr);
+        if (nodeIndex < nodes_.size() && nodeIndex >= 0)
+            nodes_[nodeIndex].addChoice(nullptr);
     }
 
     // Current message getters:
