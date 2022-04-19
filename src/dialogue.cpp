@@ -10,7 +10,7 @@ namespace rpgDialogue {
     int Dialogue::addNode(std::string message, std::string speaker) {
         nodes_.push_back(Node(message, speaker));
         head_ = &nodes_[0];     // nodes vector moved, move head pointer
-        reset();                // move current too for the same reason
+        reset();                // move current pointer for the same reason
         return nodes_.size() - 1;
     }
 
@@ -77,7 +77,10 @@ namespace rpgDialogue {
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
         current_ = current_->makeChoice(choiceNo);
-        current_->setSeen(true);
+        
+        if (current_ != nullptr) {
+            current_->setSeen(true);
+        }
     }
 
     bool Dialogue::isDone() const {
