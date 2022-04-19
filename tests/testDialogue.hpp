@@ -10,7 +10,7 @@
 using namespace rpgDialogue;
 
 
-TEST(testDialogue, testConstructor) {
+TEST(testDialogue, testConstructorDefaults) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 1);
@@ -20,6 +20,7 @@ TEST(testDialogue, testConstructor) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
+// Nodes manipulation:
 TEST(testDialogue, testAddNodeAndGetNodeCount) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
@@ -34,6 +35,7 @@ TEST(testDialogue, testAddNodeAndGetIndex) {
     ASSERT_EQ(testDialogue.addNode("Other message", "other speaker"), 2);
 }
 
+// Nodes linking:
 TEST(testDialogue, testLinkNodes) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
@@ -43,6 +45,17 @@ TEST(testDialogue, testLinkNodes) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 }
 
+TEST(testDialogue, testAddTerminalChoice) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    std::vector<std::string> expectedChoiceMessages = {END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+    ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
+}
+
+// Navigating and playing the dialogue:
 TEST(testDialogue, testMakeChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
@@ -66,16 +79,6 @@ TEST(testDialogue, testReset) {
     ASSERT_EQ(testDialogue.getSpeaker(), "speaker");
 }
 
-TEST(testDialogue, testAddTerminalChoice) {
-    Dialogue testDialogue = Dialogue("Head message", "speaker");
-
-    testDialogue.addTerminalChoice(0);
-    std::vector<std::string> expectedChoiceMessages = {"[END]"};
-
-    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
-    ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
-}
-
 TEST(testDialogue, testIsDone) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -83,6 +86,12 @@ TEST(testDialogue, testIsDone) {
     testDialogue.makeChoice(0);
 
     ASSERT_TRUE(testDialogue.isDone());
+}
+
+TEST(testDialogue, testIsDoneFalse) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    ASSERT_FALSE(testDialogue.isDone());
 }
 
 
