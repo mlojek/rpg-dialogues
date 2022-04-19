@@ -68,31 +68,50 @@ namespace rpgDialogue {
 
     // Current choice messages getters:
     std::vector<std::string> Dialogue::getChoiceMessages() const {
-        return current_->getChoiceMessages();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->getChoiceMessages();
     }
 
     std::vector<std::string> Dialogue::getChoiceMessagesNumbered() const {
-        return current_->getChoiceMessagesNumbered();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->getChoiceMessagesNumbered();
     }
 
     std::vector<std::string> Dialogue::printChoiceMessages() const {
-        return current_->printChoiceMessages();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->printChoiceMessages();
     }
 
     std::vector<std::string> Dialogue::printChoiceMessagesNumbered() const {
-        return current_->printChoiceMessagesNumbered();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->printChoiceMessagesNumbered();
     }
 
     std::vector<std::tuple<std::string, bool>> Dialogue::getChoicesInfo() const {
-        return current_->getChoicesInfo();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->getChoicesInfo();
     }
 
     std::vector<std::tuple<std::string, bool>> Dialogue::printChoicesInfo() const {
-        return current_->printChoicesInfo();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->printChoicesInfo();
     }
 
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
+        // TODO 97 check if not nullptr
         current_ = current_->makeChoice(choiceNo);
         
         if (current_ != nullptr) {
