@@ -1,5 +1,6 @@
 #include "../include/dialogue.hpp"
 #include "node.hpp"
+#include <cstddef>
 
 
 namespace rpgDialogue {
@@ -52,11 +53,17 @@ namespace rpgDialogue {
 
     // Current choices info:
     int Dialogue::getChoiceCount() const {
-        return current_->getChoiceCount();
+        if (current_ == nullptr)
+            return 0;
+        else
+            return current_->getChoiceCount();
     }
     
     std::vector<bool> Dialogue::getChoicesSeen() const {
-        return current_->getChoicesSeen();
+        if (current_ == nullptr)
+            return {};
+        else
+            return current_->getChoicesSeen();
     }
 
     // Current choice messages getters:
