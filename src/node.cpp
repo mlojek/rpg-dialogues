@@ -6,6 +6,10 @@
 
 
 namespace rpgDialogue {
+    bool isInRange(int number, int rangeStart, int rangeEnd) {
+        return rangeEnd >= rangeStart && number >= rangeStart && number <= rangeEnd;
+    }
+
     Node::Node(std::string message, std::string speaker) : message_(message), speaker_(speaker), seen_(false) {}
 
     // Message getters:
