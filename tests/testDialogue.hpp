@@ -83,6 +83,27 @@ TEST(testDialogue, testPrintMessageCurrentNullptr) {
     ASSERT_EQ(testDialogue.printMessage(), END_MESSAGE);
 }
 
+// Current choices info:
+TEST(testDialogue, testGetChoiceCountCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 0);
+}
+
+TEST(testDialogue, testGetChoicesSeenCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<bool> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoicesSeen(), expected);
+}
+
 // Navigating and playing the dialogue:
 TEST(testDialogue, testMakeChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
