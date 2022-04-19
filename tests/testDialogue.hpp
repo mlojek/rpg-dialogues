@@ -104,6 +104,73 @@ TEST(testDialogue, testGetChoicesSeenCurrentNullptr) {
     ASSERT_EQ(testDialogue.getChoicesSeen(), expected);
 }
 
+// Current choice messages getters:
+TEST(testDialogue, testGetChoiceMessagesCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testGetChoiceMessagesNumberedCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoiceMessagesNumbered(), expected);
+}
+
+TEST(testDialogue, testPrintChoiceMessagesCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.printChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
+}
+
+TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::tuple<std::string, bool>> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
+}
+
+TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    std::vector<std::tuple<std::string, bool>> expected = {};
+
+    ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
+}
+
 // Navigating and playing the dialogue:
 TEST(testDialogue, testMakeChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
