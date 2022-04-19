@@ -55,6 +55,22 @@ TEST(testDialogue, testAddTerminalChoice) {
     ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
 }
 
+TEST(testDialogue, testAddTerminalChoiceIndexOutOfRange) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.addTerminalChoice(3);
+}
+
+TEST(testDialogue, testAddTerminalChoiceNegativeIndex) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.addTerminalChoice(-1);
+}
+
 // Current message getters:
 TEST(testDialogue, testGetMessageCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
