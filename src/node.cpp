@@ -32,7 +32,8 @@ namespace rpgDialogue {
 
     // Choices manipulation:
     void Node::addChoice(Node* nextNode) {
-        choices_.push_back(nextNode);
+        if (nextNode != this)
+            choices_.push_back(nextNode);
     }
 
     int Node::getChoiceCount() const {
