@@ -1,4 +1,5 @@
 #include "../include/dialogue.hpp"
+#include "node.hpp"
 
 
 namespace rpgDialogue {
@@ -29,15 +30,24 @@ namespace rpgDialogue {
 
     // Current message getters:
     std::string Dialogue::getMessage() const {
-        return current_->getMessage();
+        if (current_ == nullptr)
+            return END_MESSAGE;
+        else
+            return current_->getMessage();
     }
 
     std::string Dialogue::getSpeaker() const {
-        return current_->getSpeaker();
+        if (current_ == nullptr)
+            return END_MESSAGE;
+        else
+            return current_->getSpeaker();
     }
 
     std::string Dialogue::printMessage() const {
-        return current_->printMessage();
+        if (current_ == nullptr)
+            return END_MESSAGE;
+        else
+            return current_->printMessage();
     }
 
     // Current choices info:
