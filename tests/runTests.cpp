@@ -2,6 +2,7 @@
 
 #include "testNode.hpp"
 #include "testDialogue.hpp"
+#include "testIsInRange.hpp"
 
 
 int main(int argc, char **argv) {
