@@ -55,6 +55,34 @@ TEST(testDialogue, testAddTerminalChoice) {
     ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
 }
 
+// Current message getters:
+TEST(testDialogue, testGetMessageCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getMessage(), END_MESSAGE);
+}
+
+TEST(testDialogue, testGetSpeakerCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getSpeaker(), END_MESSAGE);
+}
+
+TEST(testDialogue, testPrintMessageCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.printMessage(), END_MESSAGE);
+}
+
 // Navigating and playing the dialogue:
 TEST(testDialogue, testMakeChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
