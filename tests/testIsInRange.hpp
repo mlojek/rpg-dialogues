@@ -41,5 +41,25 @@ TEST(testIsInRange, testOverRangeBoudsEqual) {
     ASSERT_FALSE(isInRange(40, 7, 7));
 }
 
+TEST(testIsInRange, testInvalidRangeBelow) {
+    ASSERT_FALSE(isInRange(2, 9, 7));
+}
+
+TEST(testIsInRange, testInvalidRangeEqualLower) {
+    ASSERT_FALSE(isInRange(7, 9, 7));
+}
+
+TEST(testIsInRange, testInvalidRangeBetween) {
+    ASSERT_FALSE(isInRange(8, 9, 7));
+}
+
+TEST(testIsInRange, testInvalidRangeEqualHigher) {
+    ASSERT_FALSE(isInRange(9, 9, 7));
+}
+
+TEST(testIsInRange, testInvalidRangeAbove) {
+    ASSERT_FALSE(isInRange(42, 9, 7));
+}
+
 
 #endif
