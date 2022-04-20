@@ -22,11 +22,12 @@ namespace rpgDialogue {
 
     // Nodes linking:
     void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
-        nodes_[nodeIndex0].addChoice(&nodes_[nodeIndex1]);
+        if (isInRange(nodeIndex0, 0, nodes_.size() - 1) && isInRange(nodeIndex1, 0, nodes_.size() - 1))
+            nodes_[nodeIndex0].addChoice(&nodes_[nodeIndex1]);
     }
 
     void Dialogue::addTerminalChoice(unsigned nodeIndex) {
-        if (nodeIndex < nodes_.size() && nodeIndex >= 0)
+        if (isInRange(nodeIndex, 0, nodes_.size() - 1))
             nodes_[nodeIndex].addChoice(nullptr);
     }
 
