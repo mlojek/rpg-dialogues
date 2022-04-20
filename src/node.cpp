@@ -45,10 +45,10 @@ namespace rpgDialogue {
     }
 
     Node* Node::makeChoice(int choiceNo) {
-        if (choiceNo >= choices_.size() || choiceNo < 0)
-            return this;
-        else
+        if (isInRange(choiceNo, 0, choices_.size() - 1))
             return choices_[choiceNo];
+        else
+            return this;
     }
 
     void Node::clearChoices() {
