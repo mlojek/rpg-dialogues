@@ -45,6 +45,42 @@ TEST(testDialogue, testLinkNodes) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 }
 
+TEST(testDialogue, testLinkNodesIndex0OutOfRange) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("Message1", "Speaker1");
+    testDialogue.addNode("Message2", "Speaker2");
+    testDialogue.addNode("Message3", "Speaker3");
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.linkNodes(4, 2);
+}
+
+TEST(testDialogue, testLinkNodesIndex1OutOfRange) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("Message1", "Speaker1");
+    testDialogue.addNode("Message2", "Speaker2");
+    testDialogue.addNode("Message3", "Speaker3");
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.linkNodes(2, 10);
+}
+
+TEST(testDialogue, testLinkNodesBothOutOfRange) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("Message1", "Speaker1");
+    testDialogue.addNode("Message2", "Speaker2");
+    testDialogue.addNode("Message3", "Speaker3");
+
+    // The point of this test is to make sure it doesnt crash
+    // No assertion is required here
+    testDialogue.linkNodes(5, 10);
+}
+
 TEST(testDialogue, testAddTerminalChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
