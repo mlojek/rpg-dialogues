@@ -18,7 +18,7 @@ namespace rpgDialogue {
         std::string speaker_;
         std::vector<Node*> choices_;
         bool seen_;
-        int respect_gain_;
+        int respectGain_;
 
     public:
         Node(std::string message, std::string speaker, int respect_gain = 0);
