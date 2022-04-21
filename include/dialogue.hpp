@@ -16,7 +16,7 @@ namespace rpgDialogue {
         int respect_;
 
     public:
-        Dialogue(std::string headMessage, std::string speaker); // Initialise currentRespect, add headRespect arg
+        Dialogue(std::string headMessage, std::string speaker, int respectGain = 0);
 
         // Nodes manipulation:
         int addNode(std::string message, std::string speaker, int respectGain = 0);

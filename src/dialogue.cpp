@@ -4,8 +4,8 @@
 
 
 namespace rpgDialogue {
-    Dialogue::Dialogue(std::string headMessage, std::string speaker) {
-        addNode(headMessage, speaker);
+    Dialogue::Dialogue(std::string headMessage, std::string speaker, int respectGain) : respect_(0) {
+        addNode(headMessage, speaker, respectGain);
     }
 
     // Nodes manipulation:
