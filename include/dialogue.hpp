@@ -13,12 +13,13 @@ namespace rpgDialogue {
         Node* head_;
         Node* current_;
         std::vector<Node> nodes_;
+        int respect_;
 
     public:
-        Dialogue(std::string headMessage, std::string speaker);
+        Dialogue(std::string headMessage, std::string speaker); // Initialise currentRespect, add headRespect arg
 
         // Nodes manipulation:
-        int addNode(std::string message, std::string speaker);
+        int addNode(std::string message, std::string speaker); // add respectGain field
         int getNodeCount() const;
 
         // Nodes linking:
@@ -43,9 +44,9 @@ namespace rpgDialogue {
         std::vector<std::tuple<std::string, bool>> printChoicesInfo() const;
 
         // Navigating/playing the dialogue:
-        void makeChoice(unsigned choiceNo);
+        void makeChoice(unsigned choiceNo); // Add respectGain to respectCurrent
         bool isDone() const;
-        void reset();
+        void reset(); // zero respect_
     };
 }
 
