@@ -128,13 +128,13 @@ namespace rpgDialogue {
     }
 
     void Dialogue::reset() {
-        respect_ = 0;
         current_ = head_;
 
         for (auto node : nodes_) {
             node.setSeen(false);
         }
 
+        respect_ = head_->getRespectGain();
         head_->setSeen(true);
     }
 
