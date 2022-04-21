@@ -2,6 +2,7 @@
 #define TEST_NODE_HPP
 
 #include <cstddef>
+#include <gtest/gtest-death-test.h>
 #include <gtest/gtest.h>
 #include <vector>
 #include "../src/node.hpp"
@@ -15,6 +16,7 @@ TEST(testNode, testConstructorDefaults) {
     ASSERT_EQ(testNode.getMessage(), "Node message.");
     ASSERT_EQ(testNode.getSpeaker(), "Node speaker");
     ASSERT_EQ(testNode.getChoiceCount(), 0);
+    ASSERT_EQ(testNode.getRespectGain(), 0);
     ASSERT_EQ(testNode.isSeen(), false);
 }
 
