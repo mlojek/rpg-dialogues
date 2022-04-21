@@ -53,7 +53,7 @@ namespace rpgDialogue {
 
         // Respect gain:
         void setRespectGain(int newVal);
-        int getRespectGain();
+        int getRespectGain() const;
     };
 }
 

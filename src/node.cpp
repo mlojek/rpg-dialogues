@@ -173,7 +173,7 @@ namespace rpgDialogue {
         respectGain_ = newVal;
     }
 
-    int Node::getRespectGain() {
+    int Node::getRespectGain() const {
         return respectGain_;
     }
 }
