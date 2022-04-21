@@ -167,4 +167,13 @@ namespace rpgDialogue {
 
         return result;
     }
+
+    // Respect gain:
+    void Node::setRespectGain(int newVal) {
+        respectGain_ = newVal;
+    }
+
+    int Node::getRespectGain() {
+        return respectGain_;
+    }
 }

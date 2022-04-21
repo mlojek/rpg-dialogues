@@ -50,6 +50,10 @@ namespace rpgDialogue {
         bool isSeen() const;
         void setSeen(bool newVal);
         std::vector<bool> getChoicesSeen() const;
+
+        // Respect gain:
+        void setRespectGain(int newVal);
+        int getRespectGain();
     };
 }
 
