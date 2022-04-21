@@ -385,5 +385,20 @@ TEST(testNode, testGetChoicesSeenDefault) {
     ASSERT_EQ(testNode.getChoicesSeen(), expected);
 }
 
+// Respect gain:
+TEST(testNode, testRespectGainInConstructor) {
+    Node testNode("message", "speaker", 30);
+
+    ASSERT_EQ(testNode.getRespectGain(), 30);
+}
+
+TEST(testNode, testSetRespectGain) {
+    Node testNode("message", "speaker");
+
+    testNode.setRespectGain(-10);
+
+    ASSERT_EQ(testNode.getRespectGain(), -10);
+}
+
 
 #endif
