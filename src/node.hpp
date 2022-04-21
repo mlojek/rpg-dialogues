@@ -21,7 +21,7 @@ namespace rpgDialogue {
         int respect_gain_;
 
     public:
-        Node(std::string message, std::string speaker);
+        Node(std::string message, std::string speaker, int respect_gain = 0);
 
         // Message getters:
         std::string getMessage() const;
