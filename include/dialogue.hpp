@@ -47,6 +47,9 @@ namespace rpgDialogue {
         void makeChoice(unsigned choiceNo);
         bool isDone() const;
         void reset();
+
+        // Respect:
+        int getRespect();
     };
 }
 

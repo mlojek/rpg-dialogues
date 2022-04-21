@@ -137,4 +137,8 @@ namespace rpgDialogue {
 
         head_->setSeen(true);
     }
+
+    int Dialogue::getRespect() {
+        return respect_;
+    }
 }
