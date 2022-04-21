@@ -116,8 +116,11 @@ namespace rpgDialogue {
         if (current_ != nullptr)
             current_ = current_->makeChoice(choiceNo);
         
-        if (current_ != nullptr)
+        if (current_ != nullptr) {
+            if (!current_->isSeen())
+                respect_ += current_->getRespectGain();
             current_->setSeen(true);
+        }
     }
 
     bool Dialogue::isDone() const {
