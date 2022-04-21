@@ -46,7 +46,7 @@ namespace rpgDialogue {
         // Navigating/playing the dialogue:
         void makeChoice(unsigned choiceNo); // Add respectGain to respectCurrent
         bool isDone() const;
-        void reset(); // zero respect_
+        void reset();
     };
 }
 
