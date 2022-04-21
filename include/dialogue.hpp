@@ -49,7 +49,7 @@ namespace rpgDialogue {
         void reset();
 
         // Respect:
-        int getRespect();
+        int getRespect() const;
     };
 }
 
