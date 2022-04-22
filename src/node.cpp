@@ -10,56 +10,56 @@ namespace rpgDialogue {
         return rangeEnd >= rangeStart && number >= rangeStart && number <= rangeEnd;
     }
 
-    Node::Node(std::string message, std::string speaker, int respectGain) : message_(message), speaker_(speaker), respectGain_(respectGain), seen_(false) {}
+    Node::Node(std::string message, std::string speaker, int respectGain) : m_message(message), m_speaker(speaker), m_respectGain(respectGain), m_seen(false) {}
 
     // Message getters:
     std::string Node::getMessage() const {
-        return message_;
+        return m_message;
     }
 
     std::string Node::getSpeaker() const {
-        return speaker_;
+        return m_speaker;
     }
 
     std::string Node::printMessage() const {
-        return speaker_ + ": " + message_;
+        return m_speaker + ": " + m_message;
     }
 
     // Message setters:
     void Node::setMessage(std::string newMessage) {
-        message_ = newMessage;
+        m_message = newMessage;
     }
 
     void Node::setSpeaker(std::string newSpeaker) {
-        speaker_ = newSpeaker;
+        m_speaker = newSpeaker;
     }
 
     // Choices manipulation:
     void Node::addChoice(Node* nextNode) {
         if (nextNode != this)
-            choices_.push_back(nextNode);
+            m_choices.push_back(nextNode);
     }
 
     int Node::getChoiceCount() const {
-        return choices_.size();
+        return m_choices.size();
     }
 
     Node* Node::makeChoice(int choiceNo) {
-        if (isInRange(choiceNo, 0, choices_.size() - 1))
-            return choices_[choiceNo];
+        if (isInRange(choiceNo, 0, m_choices.size() - 1))
+            return m_choices[choiceNo];
         else
             return this;
     }
 
     void Node::clearChoices() {
-        choices_.clear();
+        m_choices.clear();
     }
 
     // Choice messages getters:
     std::vector<std::string> Node::getChoiceMessages() const {
         std::vector<std::string> result;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr)
                 result.push_back(END_MESSAGE);
             else
@@ -73,7 +73,7 @@ namespace rpgDialogue {
         std::vector<std::string> result;
         int index = 0;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr)
                 result.push_back(std::to_string(index) + ") " + END_MESSAGE);
             else
@@ -88,7 +88,7 @@ namespace rpgDialogue {
     std::vector<std::string> Node::printChoiceMessages() const {
         std::vector<std::string> result;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr)
                 result.push_back(END_MESSAGE);
             else
@@ -102,7 +102,7 @@ namespace rpgDialogue {
         std::vector<std::string> result;
         int index = 0;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr)
                 result.push_back(std::to_string(index) + ") " + END_MESSAGE);
             else
@@ -117,7 +117,7 @@ namespace rpgDialogue {
     std::vector<std::tuple<std::string, bool>> Node::getChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr) {
                 result.push_back({END_MESSAGE, false});
             }
@@ -132,7 +132,7 @@ namespace rpgDialogue {
     std::vector<std::tuple<std::string, bool>> Node::printChoicesInfo() const {
         std::vector<std::tuple<std::string, bool>> result;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr) {
                 result.push_back({END_MESSAGE, false});
             }
@@ -146,17 +146,17 @@ namespace rpgDialogue {
 
     // Seen info:
     bool Node::isSeen() const {
-        return seen_;
+        return m_seen;
     }
 
     void Node::setSeen(bool newVal) {
-        seen_ = newVal;
+        m_seen = newVal;
     }
 
     std::vector<bool> Node::getChoicesSeen() const {
         std::vector<bool> result;
 
-        for (auto choice : choices_) {
+        for (auto choice : m_choices) {
             if (choice == nullptr) {
                 result.push_back(false);
             }
@@ -170,10 +170,10 @@ namespace rpgDialogue {
 
     // Respect gain:
     void Node::setRespectGain(int newVal) {
-        respectGain_ = newVal;
+        m_respectGain = newVal;
     }
 
     int Node::getRespectGain() const {
-        return respectGain_;
+        return m_respectGain;
     }
 }

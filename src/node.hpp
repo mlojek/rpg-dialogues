@@ -14,11 +14,11 @@ namespace rpgDialogue {
 
     class Node {
     private:
-        std::string message_;
-        std::string speaker_;
-        std::vector<Node*> choices_;
-        bool seen_;
-        int respectGain_;
+        std::string m_message;
+        std::string m_speaker;
+        std::vector<Node*> m_choices;
+        bool m_seen;
+        int m_respectGain;
 
     public:
         Node(std::string message, std::string speaker, int respectGain = 0);
