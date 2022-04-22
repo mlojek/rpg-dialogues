@@ -10,10 +10,10 @@
 namespace rpgDialogue {
     class Dialogue {
     private:
-        Node* head_;
-        Node* current_;
-        std::vector<Node> nodes_;
-        int respect_;
+        Node* p_head;
+        Node* p_current;
+        std::vector<Node> m_nodes;
+        int m_respect;
 
     public:
         Dialogue(std::string headMessage, std::string speaker, int respectGain = 0);
