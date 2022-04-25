@@ -18,10 +18,10 @@ namespace rpgDialogue {
         std::set<int> m_info;
 
     public:
-        Dialogue(std::string headMessage, std::string speaker, int respectGain = 0);  // infoGain arg
+        Dialogue(std::string headMessage, std::string speaker, int respectGain = 0, int infoGain = 0);
 
         // Nodes manipulation:
-        int addNode(std::string message, std::string speaker, int respectGain = 0);   // infoGain arg
+        int addNode(std::string message, std::string speaker, int respectGain = 0, int infoGain = 0);
         int getNodeCount() const;
 
         // Nodes linking:
