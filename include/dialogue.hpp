@@ -5,6 +5,7 @@
 #include "../src/node.hpp"
 #include <string>
 #include <vector>
+#include <set>
 
 
 namespace rpgDialogue {
@@ -14,12 +15,13 @@ namespace rpgDialogue {
         Node* p_current;
         std::vector<Node> m_nodes;
         int m_respect;
+        std::set<int> m_info;
 
     public:
-        Dialogue(std::string headMessage, std::string speaker, int respectGain = 0);
+        Dialogue(std::string headMessage, std::string speaker, int respectGain = 0);  // infoGain arg
 
         // Nodes manipulation:
-        int addNode(std::string message, std::string speaker, int respectGain = 0);
+        int addNode(std::string message, std::string speaker, int respectGain = 0);   // infoGain arg
         int getNodeCount() const;
 
         // Nodes linking:
@@ -44,12 +46,15 @@ namespace rpgDialogue {
         std::vector<std::tuple<std::string, bool>> printChoicesInfo() const;
 
         // Navigating/playing the dialogue:
-        void makeChoice(unsigned choiceNo);
+        void makeChoice(unsigned choiceNo);     // add info
         bool isDone() const;
-        void reset();
+        void reset();                           // reset info
 
         // Respect:
         int getRespect() const;
+
+        // Info:
+        // std::set<int> getInfo() const;
     };
 }
 
