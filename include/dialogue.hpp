@@ -54,7 +54,7 @@ namespace rpgDialogue {
         int getRespect() const;
 
         // Info:
-        // std::set<int> getInfo() const;
+        std::set<int> getInfo() const;
     };
 }
 

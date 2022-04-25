@@ -138,7 +138,13 @@ namespace rpgDialogue {
         p_head->setSeen(true);
     }
 
+    // Respect:
     int Dialogue::getRespect() const {
         return m_respect;
+    }
+
+    // Info:
+    std::set<int> Dialogue::getInfo() const {
+        return m_info;
     }
 }
