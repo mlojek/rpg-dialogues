@@ -22,7 +22,7 @@ namespace rpgDialogue {
         int m_infoGain;
 
     public:
-        Node(std::string message, std::string speaker, int respectGain = 0);
+        Node(std::string message, std::string speaker, int respectGain = 0, int infoGain = 0);
 
         // Message getters:
         std::string getMessage() const;
@@ -55,6 +55,10 @@ namespace rpgDialogue {
         // Respect gain:
         void setRespectGain(int newVal);
         int getRespectGain() const;
+
+        // Info gain:
+        void setInfoGain(int newVal);
+        int getInfoGain() const;
     };
 }
 
