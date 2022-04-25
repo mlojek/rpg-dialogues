@@ -46,9 +46,9 @@ namespace rpgDialogue {
         std::vector<std::tuple<std::string, bool>> printChoicesInfo() const;
 
         // Navigating/playing the dialogue:
-        void makeChoice(unsigned choiceNo);     // add info
+        void makeChoice(unsigned choiceNo);
         bool isDone() const;
-        void reset();                           // reset info
+        void reset();
 
         // Respect:
         int getRespect() const;

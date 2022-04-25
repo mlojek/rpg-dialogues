@@ -117,8 +117,10 @@ namespace rpgDialogue {
             p_current = p_current->makeChoice(choiceNo);
         
         if (p_current != nullptr) {
-            if (!p_current->isSeen())
+            if (!p_current->isSeen()) {
                 m_respect += p_current->getRespectGain();
+                m_info.insert(p_current->getInfoGain());
+            }
             p_current->setSeen(true);
         }
     }
@@ -135,6 +137,7 @@ namespace rpgDialogue {
         }
 
         m_respect = p_head->getRespectGain();
+        m_info = {p_head->getInfoGain()};
         p_head->setSeen(true);
     }
 
