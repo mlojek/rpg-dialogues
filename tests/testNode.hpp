@@ -18,6 +18,7 @@ TEST(testNode, testConstructorDefaults) {
     ASSERT_EQ(testNode.getChoiceCount(), 0);
     ASSERT_EQ(testNode.getRespectGain(), 0);
     ASSERT_EQ(testNode.isSeen(), false);
+    ASSERT_EQ(testNode.getInfoGain(), 0);
 }
 
 // Message getters:
@@ -398,6 +399,21 @@ TEST(testNode, testSetRespectGain) {
     testNode.setRespectGain(-10);
 
     ASSERT_EQ(testNode.getRespectGain(), -10);
+}
+
+// Info gain:
+TEST(testNode, testInfoGainInConstructor) {
+    Node testNode("message", "speaker", 30, 1);
+
+    ASSERT_EQ(testNode.getInfoGain(), 1);
+}
+
+TEST(testNode, testSetInfoGain) {
+    Node testNode("message", "speaker");
+
+    testNode.setInfoGain(76);
+
+    ASSERT_EQ(testNode.getInfoGain(), 76);
 }
 
 
