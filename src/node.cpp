@@ -10,7 +10,8 @@ namespace rpgDialogue {
         return rangeEnd >= rangeStart && number >= rangeStart && number <= rangeEnd;
     }
 
-    Node::Node(std::string message, std::string speaker, int respectGain) : m_message(message), m_speaker(speaker), m_respectGain(respectGain), m_seen(false) {}
+    Node::Node(std::string message, std::string speaker, int respectGain, int infoGain)
+        : m_message(message), m_speaker(speaker), m_respectGain(respectGain), m_seen(false), m_infoGain(infoGain) {}
 
     // Message getters:
     std::string Node::getMessage() const {
@@ -175,5 +176,14 @@ namespace rpgDialogue {
 
     int Node::getRespectGain() const {
         return m_respectGain;
+    }
+
+    // Info gain:
+    void Node::setInfoGain(int newVal) {
+        m_infoGain = newVal;
+    }
+
+    int Node::getInfoGain() const {
+        return m_infoGain;
     }
 }
