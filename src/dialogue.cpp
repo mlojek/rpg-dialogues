@@ -10,7 +10,7 @@ namespace rpgDialogue {
 
     // Nodes manipulation:
     int Dialogue::addNode(std::string message, std::string speaker, int respectGain, int infoGain) {
-        m_nodes.push_back(Node(message, speaker, respectGain, infoGain));
+        m_nodes.emplace_back(message, speaker, respectGain, infoGain);
         p_head = &m_nodes[0];         // nodes vector moved, move head pointer
         reset();                    // move current pointer for the same reason
         return m_nodes.size() - 1;   // return index of the added node
