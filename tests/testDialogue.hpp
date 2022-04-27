@@ -359,6 +359,69 @@ TEST(testDialogue, testRespectVisitTheSameTwice) {
 }
 
 // Info
-// Add info unit tests
+TEST(testDialogue, testInfoAccumulation) {
+    Dialogue testDialogue("Head message", "speaker", 0, 1);
+
+    testDialogue.addNode("new message", "speaker", 0, 2);
+    testDialogue.addNode("new message", "speaker", 0, 5);
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2, 5}));
+}
+
+TEST(testDialogue, testInfoAccumulationAndReset) {
+    Dialogue testDialogue("Head message", "speaker", 0, 1);
+
+    testDialogue.addNode("new message", "speaker", 0, 2);
+    testDialogue.addNode("new message", "speaker", 0, 5);
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    testDialogue.reset();
+
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1}));
+}
+
+TEST(testDialogue, testInfoAccumulationResetAndAgain) {
+    Dialogue testDialogue("Head message", "speaker", 0, 1);
+
+    testDialogue.addNode("new message", "speaker", 0, 2);
+    testDialogue.addNode("new message", "speaker", 0, 5);
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    testDialogue.reset();
+
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
+}
+
+TEST(testDialogue, testInfoDialogueOutcome) {
+    Dialogue testDialogue("Head message", "speaker", 0, 1);
+
+    testDialogue.addNode("new message", "speaker", 0, 2);
+    testDialogue.addNode("new message", "speaker", 0, 5);
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+
+    testDialogue.makeChoice(1);
+
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 5}));
+}
 
 #endif
