@@ -320,5 +320,27 @@ TEST(testDialogue, testRespectAccumulationAndReset) {
     ASSERT_EQ(testDialogue.getRespect(), -100);
 }
 
+TEST(testDialogue, testRespectResetAndRespectAgain) {
+    Dialogue testDialogue("Head message", "speaker", -100);
+
+    testDialogue.addNode("New message", "new speaker", 30);
+    testDialogue.addNode("New new message", "new new speaker", 78);
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    testDialogue.reset();
+
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getRespect(), 8);
+}
+
+// Info
+// Add info unit tests
 
 #endif

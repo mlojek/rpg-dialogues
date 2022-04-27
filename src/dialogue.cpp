@@ -132,7 +132,7 @@ namespace rpgDialogue {
     void Dialogue::reset() {
         p_current = p_head;
 
-        for (auto node : m_nodes) {
+        for (Node& node : m_nodes) {
             node.setSeen(false);
         }
 
