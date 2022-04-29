@@ -3,6 +3,7 @@
 #include "testNode.hpp"
 #include "testDialogue.hpp"
 #include "testIsInRange.hpp"
+#include "testDialogueFromFile.hpp"
 
 
 int main(int argc, char **argv) {
