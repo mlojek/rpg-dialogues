@@ -4,5 +4,5 @@ GTESTFLAGS = -lgtest -lgtest_main -pthread
 
 
 test:
-	$(CC) $(GTESTFLAGS) tests/* src/* -o runTests
+	$(CC) $(GTESTFLAGS) tests/runTests.cpp src/* -o runTests
 	./runTests
