@@ -27,7 +27,12 @@ TEST(testDialogueFromFile, testCorrect) {
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
 
-// Bigger dialogue (merchant?)
+TEST(testDialogueFromFile, testMerchant) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+
+    ASSERT_EQ(testDialogue.getNodeCount(), 10);
+}
+
 // empty file
 // Just head node and terminal choice
 // Just head node and space
