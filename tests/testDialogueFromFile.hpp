@@ -41,12 +41,22 @@ TEST(testDialogueFromFile, testEmpty) {
 
 TEST(testDialogueFromFile, testJustTerminal) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminal");
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+
+    testDialogue.makeChoice(0);
+
+    ASSERT_TRUE(testDialogue.isDone());
 }
 
-// Just head node and terminal choice
+TEST(testDialogueFromFile, testJustNodes) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justNodes");
+
+    ASSERT_EQ(testDialogue.getNodeCount(), 3);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 0);
+}
+
 // Just head node and space
-// Just head node and eof
-// No links (2 spaces)
 // No terminal choice
 // No terminal choice and space
 
