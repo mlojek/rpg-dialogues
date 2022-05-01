@@ -23,7 +23,18 @@ TEST(testDialogueFromFile, testCorrect) {
     testDialogue.makeChoice(0);
 
     ASSERT_TRUE(testDialogue.isDone());
+    ASSERT_EQ(testDialogue.getRespect(), 11);
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
+
+// Bigger dialogue (merchant?)
+// empty file
+// Just head node and terminal choice
+// Just head node and space
+// Just head node and eof
+// No links (2 spaces)
+// No terminal choice
+// No terminal choice and space
 
 
 #endif
