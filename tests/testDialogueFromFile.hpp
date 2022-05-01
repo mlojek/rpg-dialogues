@@ -31,9 +31,18 @@ TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 10);
+
+    // TODO more assertions
 }
 
-// empty file
+TEST(testDialogueFromFile, testEmpty) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/empty");
+}
+
+TEST(testDialogueFromFile, testJustTerminal) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminal");
+}
+
 // Just head node and terminal choice
 // Just head node and space
 // Just head node and eof
