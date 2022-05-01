@@ -14,6 +14,7 @@ TEST(testDialogueFromFile, testCorrect) {
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+    ASSERT_EQ(testDialogue.printMessage(), "Head speaker: This is the head node");
 
     testDialogue.makeChoice(0);
 
