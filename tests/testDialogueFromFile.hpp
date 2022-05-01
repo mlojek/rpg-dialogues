@@ -59,8 +59,16 @@ TEST(testDialogueFromFile, testJustNodes) {
 TEST(testDialogueFromFile, testTooManySpaces) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/tooManySpaces");
 
-    ASSERT_EQ(testDialogue.getNodeCount(), 3);
+    ASSERT_EQ(testDialogue.getNodeCount(), 1);
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
+}
+
+TEST(testDialogueFromFile, testNoTerminal) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminal");
+}
+
+TEST(testDialogueFromFile, testNoTerminalAndSpace) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminalAndSpace");
 }
 
 // Just head node and space
