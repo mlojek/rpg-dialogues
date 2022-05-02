@@ -28,8 +28,8 @@ TEST(testDialogueFromFile, testCorrect) {
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
 
-TEST(testDialogueFromFile, testCorrectTrailingSpaces) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctTrailingSpaces");
+TEST(testDialogueFromFile, testCorrectTrailingLines) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctTrailingLines");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -95,19 +95,12 @@ TEST(testDialogueFromFile, testJustNodes) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
-TEST(testDialogueFromFile, testTooManySpaces) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/tooManySpaces");
-
-    ASSERT_EQ(testDialogue.getNodeCount(), 1);
-    ASSERT_EQ(testDialogue.getChoiceCount(), 0);
-}
-
 TEST(testDialogueFromFile, testNoTerminal) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminal");
 }
 
-TEST(testDialogueFromFile, testNoTerminalAndSpace) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminalAndSpace");
+TEST(testDialogueFromFile, testNoTerminalAndNewline) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminalAndNewline");
 }
 
 // Just head node and spaces
