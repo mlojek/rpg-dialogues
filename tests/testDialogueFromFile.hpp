@@ -60,8 +60,8 @@ TEST(testDialogueFromFile, testJustHeadNode) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
-TEST(testDialogueFromFile, testJustTerminal) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminal");
+TEST(testDialogueFromFile, testJustTerminalChoice) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminalChoice");
 
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 
