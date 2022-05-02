@@ -50,6 +50,9 @@ TEST(testDialogueFromFile, testCorrectSingleIndexInLink) {
     ASSERT_THROW(dialogueFromFile("tests/testFiles/correctSingleIndexInLink"), DialogueFileException);
 }
 
+TEST(testDialogueFromFile, testCorrectEmptyFirstLine) {
+    ASSERT_THROW(dialogueFromFile("tests/testFiles/correctEmptyFirstLine"), DialogueFileException);
+}
 
 TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
