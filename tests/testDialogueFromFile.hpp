@@ -107,6 +107,7 @@ TEST(testDialogueFromFile, testJustHeadNode) {
 TEST(testDialogueFromFile, testJustTerminalChoice) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminalChoice");
 
+    ASSERT_EQ(testDialogue.getNodeCount(), 1);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 
     testDialogue.makeChoice(0);
@@ -123,15 +124,14 @@ TEST(testDialogueFromFile, testJustNodes) {
 
 TEST(testDialogueFromFile, testNoTerminal) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminal");
-}
 
-TEST(testDialogueFromFile, testNoTerminalAndNewline) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminalAndNewline");
-}
+    ASSERT_EQ(testDialogue.getNodeCount(), 2);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 
-// Just head node and spaces
-// No terminal choice
-// No terminal choice and space
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+}
 
 
 #endif
