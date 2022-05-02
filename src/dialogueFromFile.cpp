@@ -5,6 +5,8 @@
 #include <string>
 
 
+
+
 namespace rpgDialogue {
     Dialogue dialogueFromFile(std::string filePath) {
         try {
@@ -67,8 +69,11 @@ namespace rpgDialogue {
 
             // Add terminal choice loop
             while (!inputFile.eof()) {
-                // Get the node index
+                // Get the node index, if empty break
                 getline(inputFile, strBuf[0]);
+                if (strBuf[0].empty())
+                    break;
+                
                 intBuf[0] = stoi(strBuf[0]);
 
                 // Add terminal choice
@@ -81,7 +86,7 @@ namespace rpgDialogue {
             return result;
         }
         catch (std::exception& e) {
-            throw std::invalid_argument("Invalid dialogue file");
+            throw DialogueFileException();
         }
     }
 }

@@ -3,6 +3,7 @@
 
 
 #include <gtest/gtest.h>
+#include <stdexcept>
 #include "../include/dialogueFromFile.hpp"
 
 
@@ -36,7 +37,7 @@ TEST(testDialogueFromFile, testMerchant) {
 }
 
 TEST(testDialogueFromFile, testEmpty) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/empty");
+    ASSERT_THROW(dialogueFromFile("tests/testFiles/empty"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testJustTerminal) {
