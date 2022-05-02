@@ -45,8 +45,11 @@ TEST(testDialogueFromFile, testMerchant) {
     ASSERT_TRUE(testDialogue.isDone());
 }
 
-TEST(testDialogueFromFile, testEmpty) {
+TEST(testDialogueFromFile, testEmptyFile) {
     ASSERT_THROW(dialogueFromFile("tests/testFiles/empty"), DialogueFileException);
+}
+TEST(testDialogueFromFile, testNonexistentFile) {
+    ASSERT_THROW(dialogueFromFile("tests/testFiles/thisFileDoesNotExist"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testJustTerminal) {
