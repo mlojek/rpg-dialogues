@@ -28,6 +28,24 @@ TEST(testDialogueFromFile, testCorrect) {
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
 
+TEST(testDialogueFromFile, testCorrectTrailingSpaces) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctTrailingSpaces");
+
+    ASSERT_EQ(testDialogue.getNodeCount(), 2);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+    ASSERT_EQ(testDialogue.printMessage(), "Head speaker: This is the head node");
+
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+
+    testDialogue.makeChoice(0);
+
+    ASSERT_TRUE(testDialogue.isDone());
+    ASSERT_EQ(testDialogue.getRespect(), 11);
+    ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
+}
+
 TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
 
