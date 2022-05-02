@@ -32,8 +32,17 @@ TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 10);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
 
-    // TODO more assertions
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 4);
+
+    testDialogue.makeChoice(3);
+    testDialogue.makeChoice(0);
+    testDialogue.makeChoice(0);
+
+    ASSERT_TRUE(testDialogue.isDone());
 }
 
 TEST(testDialogueFromFile, testEmpty) {
@@ -72,7 +81,7 @@ TEST(testDialogueFromFile, testNoTerminalAndSpace) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminalAndSpace");
 }
 
-// Just head node and space
+// Just head node and spaces
 // No terminal choice
 // No terminal choice and space
 
