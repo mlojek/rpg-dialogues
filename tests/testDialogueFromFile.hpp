@@ -46,6 +46,11 @@ TEST(testDialogueFromFile, testCorrectTrailingLines) {
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
 
+TEST(testDialogueFromFile, testCorrectSingleIndexInLink) {
+    ASSERT_THROW(dialogueFromFile("tests/testFiles/correctSingleIndexInLink"), DialogueFileException);
+}
+
+
 TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
 
