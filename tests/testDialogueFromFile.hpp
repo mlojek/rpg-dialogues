@@ -48,8 +48,16 @@ TEST(testDialogueFromFile, testMerchant) {
 TEST(testDialogueFromFile, testEmptyFile) {
     ASSERT_THROW(dialogueFromFile("tests/testFiles/empty"), DialogueFileException);
 }
+
 TEST(testDialogueFromFile, testNonexistentFile) {
     ASSERT_THROW(dialogueFromFile("tests/testFiles/thisFileDoesNotExist"), DialogueFileException);
+}
+
+TEST(testDialogueFromFile, testJustHeadNode) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justHeadNode");
+
+    ASSERT_EQ(testDialogue.getNodeCount(), 1);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
 TEST(testDialogueFromFile, testJustTerminal) {
