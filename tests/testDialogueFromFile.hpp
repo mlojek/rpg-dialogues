@@ -72,6 +72,17 @@ TEST(testDialogueFromFile, testCorrectSpaceAfterInt) {
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 2}));
 }
 
+TEST(testDialogueFromFile, testCorrectLinkDoubleSpace) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctLinkDoubleSpace");
+
+    ASSERT_EQ(testDialogue.getNodeCount(), 2);
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 1);
+}
+
 TEST(testDialogueFromFile, testMerchant) {
     Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
 
