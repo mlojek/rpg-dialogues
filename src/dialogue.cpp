@@ -1,4 +1,5 @@
 #include "../include/dialogue.hpp"
+#include <initializer_list>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -25,6 +26,8 @@ namespace rpgDialogue {
     void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
         if (nodeIndex0 < 0 || nodeIndex0 >= m_nodes.size() || nodeIndex1 < 0 || nodeIndex1 >= m_nodes.size())
             throw std::out_of_range("One or more node indexes out of range");
+        else if (nodeIndex0 == nodeIndex1)
+            throw std::invalid_argument("Can't link node with itself");
         else
             m_nodes[nodeIndex0].choices.push_back(&m_nodes[nodeIndex1]);
     }
