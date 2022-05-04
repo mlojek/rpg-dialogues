@@ -13,6 +13,15 @@ namespace rpgDialogue {
 
     class Dialogue {
     private:
+        struct Node {
+            std::string message, speaker;
+            std::vector<Node*> choices;
+            bool seen;
+            int respectGain, infoGain;
+
+            Node(std::string message, std::string speaker, int respectGain = 0, int infoGain = 0) : message(message), speaker(speaker), respectGain(respectGain), infoGain(infoGain) {};
+        };
+
         Node* p_head;
         Node* p_current;
         std::vector<Node> m_nodes;
