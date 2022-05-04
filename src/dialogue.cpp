@@ -1,6 +1,8 @@
 #include "../include/dialogue.hpp"
 #include "node.hpp"
 #include <cstddef>
+#include <string>
+#include <vector>
 
 
 namespace rpgDialogue {
@@ -48,7 +50,7 @@ namespace rpgDialogue {
         if (p_current == nullptr)
             return END_MESSAGE;
         else
-            return p_current->message + p_current->speaker;
+            return p_current->message + ": " + p_current->speaker;
     }
 
     // Current choices info:
@@ -60,53 +62,117 @@ namespace rpgDialogue {
     }
     
     std::vector<bool> Dialogue::getChoicesSeen() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->getChoicesSeen();
+        }
+        else {
+            std::vector<bool> result;
+
+            for (Node* choice : p_current->choices)
+                result.push_back(choice->seen);
+
+            return result;
+        }
     }
 
     // Current choice messages getters:
     std::vector<std::string> Dialogue::getChoiceMessages() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->getChoiceMessages();
+        }
+        else {
+            std::vector<std::string> result;
+
+            for (Node* choice : p_current->choices)
+                result.push_back(choice->message);
+
+            return result;
+        }
     }
 
     std::vector<std::string> Dialogue::getChoiceMessagesNumbered() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->getChoiceMessagesNumbered();
+        }
+        else {
+            std::vector<std::string> result;
+            int i = 0;
+
+            for (Node* choice : p_current->choices) {
+                result.emplace_back(std::to_string(i) + ") " + choice->message);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     std::vector<std::string> Dialogue::printChoiceMessages() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->printChoiceMessages();
+        }
+        else {
+            std::vector<std::string> result;
+            int i = 0;
+
+            for (Node* choice : p_current->choices) {
+                result.emplace_back(choice->speaker + ": " + choice->message);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     std::vector<std::string> Dialogue::printChoiceMessagesNumbered() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->printChoiceMessagesNumbered();
+        }
+        else {
+            std::vector<std::string> result;
+            int i = 0;
+
+            for (Node* choice : p_current->choices) {
+                result.emplace_back(std::to_string(i) + ") " + choice->speaker + ": " + choice->message);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     std::vector<std::tuple<std::string, bool>> Dialogue::getChoicesInfo() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->getChoicesInfo();
+        }
+        else {
+            std::vector<std::tuple<std::string, bool>> result;
+            int i = 0;
+
+            for (Node* choice : p_current->choices) {
+                result.emplace_back(choice->message, choice->seen);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     std::vector<std::tuple<std::string, bool>> Dialogue::printChoicesInfo() const {
-        if (p_current == nullptr)
+        if (p_current == nullptr) {
             return {};
-        else
-            return p_current->printChoicesInfo();
+        }
+        else {
+            std::vector<std::tuple<std::string, bool>> result;
+            int i = 0;
+
+            for (Node* choice : p_current->choices) {
+                result.emplace_back(choice->speaker + ": " + choice->message, choice->seen);
+                i++;
+            }
+
+            return result;
+        }
     }
 
     // Navigating/playing the dialogue:
