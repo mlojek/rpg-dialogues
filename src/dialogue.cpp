@@ -56,7 +56,7 @@ namespace rpgDialogue {
         if (p_current == nullptr)
             return 0;
         else
-            return p_current->getChoiceCount();
+            return p_current->choices.size();
     }
     
     std::vector<bool> Dialogue::getChoicesSeen() const {
@@ -112,14 +112,14 @@ namespace rpgDialogue {
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
         if (p_current != nullptr)
-            p_current = p_current->makeChoice(choiceNo);
+            p_current = p_current->choices[choiceNo];
         
         if (p_current != nullptr) {
-            if (!p_current->isSeen()) {
-                m_respect += p_current->getRespectGain();
-                m_info.insert(p_current->getInfoGain());
+            if (!p_current->seen) {
+                m_respect += p_current->respectGain;
+                m_info.insert(p_current->infoGain);
             }
-            p_current->setSeen(true);
+            p_current->seen = true;
         }
     }
 
@@ -131,12 +131,12 @@ namespace rpgDialogue {
         p_current = p_head;
 
         for (Node& node : m_nodes) {
-            node.setSeen(false);
+            node.seen = false;
         }
 
-        m_respect = p_head->getRespectGain();
-        m_info = {p_head->getInfoGain()};
-        p_head->setSeen(true);
+        m_respect = p_head->respectGain;
+        m_info = {p_head->infoGain};
+        p_head->seen = true;
     }
 
     // Respect:
