@@ -2,7 +2,6 @@
 #define DIALOGUE_HPP
 
 
-#include "../src/node.hpp"
 #include <string>
 #include <vector>
 #include <set>
