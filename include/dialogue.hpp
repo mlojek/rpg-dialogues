@@ -9,6 +9,8 @@
 
 
 namespace rpgDialogue {
+    const std::string END_MESSAGE = "[END]";
+
     class Dialogue {
     private:
         Node* p_head;

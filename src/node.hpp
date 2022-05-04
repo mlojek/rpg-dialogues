@@ -8,8 +8,6 @@
 
 
 namespace rpgDialogue {
-    const std::string END_MESSAGE = "[END]";
-
     bool isInRange(int number, int rangeStart, int rangeEnd);
 
     class Node {
