@@ -1,4 +1,5 @@
 #include "../include/dialogue.hpp"
+#include <stdexcept>
 #include <string>
 #include <vector>
 
@@ -11,9 +12,9 @@ namespace rpgDialogue {
     // Nodes manipulation:
     int Dialogue::addNode(std::string message, std::string speaker, int respectGain, int infoGain) {
         m_nodes.emplace_back(message, speaker, respectGain, infoGain);
-        p_head = &m_nodes[0];         // nodes vector moved, move head pointer
-        reset();                    // move current pointer for the same reason
-        return m_nodes.size() - 1;   // return index of the added node
+        p_head = &m_nodes[0];           // nodes vector moved, move head pointer
+        reset();                        // move current pointer for the same reason
+        return m_nodes.size() - 1;      // return index of the added node
     }
 
     int Dialogue::getNodeCount() const {
@@ -22,11 +23,17 @@ namespace rpgDialogue {
 
     // Nodes linking:
     void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
-        m_nodes[nodeIndex0].choices.push_back(&m_nodes[nodeIndex1]);
+        if (nodeIndex0 < 0 || nodeIndex0 >= m_nodes.size() || nodeIndex1 < 0 || nodeIndex1 >= m_nodes.size())
+            throw std::out_of_range("One or more node indexes out of range");
+        else
+            m_nodes[nodeIndex0].choices.push_back(&m_nodes[nodeIndex1]);
     }
 
     void Dialogue::addTerminalChoice(unsigned nodeIndex) {
-        m_nodes[nodeIndex].choices.push_back(nullptr);
+        if (nodeIndex < 0 || nodeIndex >= m_nodes.size())
+            throw std::out_of_range("Node index out of range");
+        else
+            m_nodes[nodeIndex].choices.push_back(nullptr);
     }
 
     // Current message getters:
@@ -66,8 +73,12 @@ namespace rpgDialogue {
         else {
             std::vector<bool> result;
 
-            for (Node* choice : p_current->choices)
-                result.push_back(choice->seen);
+            for (Node* choice : p_current->choices) {
+                if (choice == nullptr)
+                    result.emplace_back(false);
+                else
+                    result.emplace_back(choice->seen);
+            }
 
             return result;
         }
@@ -81,8 +92,12 @@ namespace rpgDialogue {
         else {
             std::vector<std::string> result;
 
-            for (Node* choice : p_current->choices)
-                result.push_back(choice->message);
+            for (Node* choice : p_current->choices) {
+                if (choice == nullptr)
+                    result.emplace_back(END_MESSAGE);
+                else
+                    result.emplace_back(choice->message);
+            }
 
             return result;
         }
@@ -97,7 +112,11 @@ namespace rpgDialogue {
             int i = 0;
 
             for (Node* choice : p_current->choices) {
-                result.emplace_back(std::to_string(i) + ") " + choice->message);
+                if (choice == nullptr)
+                    result.emplace_back(std::to_string(i) + ") " + END_MESSAGE);
+                else
+                    result.emplace_back(std::to_string(i) + ") " + choice->message);
+
                 i++;
             }
 
@@ -111,11 +130,12 @@ namespace rpgDialogue {
         }
         else {
             std::vector<std::string> result;
-            int i = 0;
 
             for (Node* choice : p_current->choices) {
-                result.emplace_back(choice->speaker + ": " + choice->message);
-                i++;
+                if (choice == nullptr)
+                    result.emplace_back(END_MESSAGE);
+                else
+                    result.emplace_back(choice->speaker + ": " + choice->message);
             }
 
             return result;
@@ -131,7 +151,11 @@ namespace rpgDialogue {
             int i = 0;
 
             for (Node* choice : p_current->choices) {
-                result.emplace_back(std::to_string(i) + ") " + choice->speaker + ": " + choice->message);
+                if (choice == nullptr)
+                    result.emplace_back(std::to_string(i) + ") " + END_MESSAGE);
+                else
+                    result.emplace_back(std::to_string(i) + ") " + choice->speaker + ": " + choice->message);
+
                 i++;
             }
 
@@ -175,8 +199,12 @@ namespace rpgDialogue {
 
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
-        if (p_current != nullptr)
-            p_current = p_current->choices[choiceNo];
+        if (p_current != nullptr) {
+            if (choiceNo < 0 || choiceNo >= p_current->choices.size())
+                throw std::out_of_range("Choice number out of range");
+            else
+                p_current = p_current->choices[choiceNo];
+        }
         
         if (p_current != nullptr) {
             if (!p_current->seen) {
