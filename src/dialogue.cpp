@@ -22,13 +22,11 @@ namespace rpgDialogue {
 
     // Nodes linking:
     void Dialogue::linkNodes(unsigned nodeIndex0, unsigned nodeIndex1) {
-        if (isInRange(nodeIndex0, 0, m_nodes.size() - 1) && isInRange(nodeIndex1, 0, m_nodes.size() - 1))
-            m_nodes[nodeIndex0].addChoice(&m_nodes[nodeIndex1]);
+        m_nodes[nodeIndex0].choices.push_back(&m_nodes[nodeIndex1]);
     }
 
     void Dialogue::addTerminalChoice(unsigned nodeIndex) {
-        if (isInRange(nodeIndex, 0, m_nodes.size() - 1))
-            m_nodes[nodeIndex].addChoice(nullptr);
+        m_nodes[nodeIndex].choices.push_back(nullptr);
     }
 
     // Current message getters:
@@ -36,21 +34,21 @@ namespace rpgDialogue {
         if (p_current == nullptr)
             return END_MESSAGE;
         else
-            return p_current->getMessage();
+            return p_current->message;
     }
 
     std::string Dialogue::getSpeaker() const {
         if (p_current == nullptr)
             return END_MESSAGE;
         else
-            return p_current->getSpeaker();
+            return p_current->speaker;
     }
 
     std::string Dialogue::printMessage() const {
         if (p_current == nullptr)
             return END_MESSAGE;
         else
-            return p_current->printMessage();
+            return p_current->message + p_current->speaker;
     }
 
     // Current choices info:
