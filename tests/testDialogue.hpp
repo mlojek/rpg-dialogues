@@ -202,27 +202,27 @@ TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
     ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
 }
 
-TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
-    Dialogue testDialogue = Dialogue("Head message", "speaker");
+// TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
+//     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-    testDialogue.addTerminalChoice(0);
-    testDialogue.makeChoice(0);
+//     testDialogue.addTerminalChoice(0);
+//     testDialogue.makeChoice(0);
 
-    std::vector<std::tuple<std::string, bool>> expected = {};
+//     std::vector<std::tuple<std::string, bool>> expected = {};
 
-    ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
-}
+//     ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
+// }
 
-TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
-    Dialogue testDialogue = Dialogue("Head message", "speaker");
+// TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
+//     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-    testDialogue.addTerminalChoice(0);
-    testDialogue.makeChoice(0);
+//     testDialogue.addTerminalChoice(0);
+//     testDialogue.makeChoice(0);
 
-    std::vector<std::tuple<std::string, bool>> expected = {};
+//     std::vector<std::tuple<std::string, bool>> expected = {};
 
-    ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
-}
+//     ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
+// }
 
 // Navigating and playing the dialogue:
 TEST(testDialogue, testMakeChoiceCurrentNullptr) {
