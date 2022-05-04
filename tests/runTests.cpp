@@ -1,8 +1,7 @@
 #include <gtest/gtest.h>
 
-#include "testNode.hpp"
+// #include "testNode.hpp"
 #include "testDialogue.hpp"
-#include "testIsInRange.hpp"
 #include "testDialogueFromFile.hpp"
 
 
