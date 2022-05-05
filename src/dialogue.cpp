@@ -215,6 +215,9 @@ namespace rpgDialogue {
             else
                 p_current = p_current->choices[choiceNo];
         }
+        else {
+            throw std::logic_error("Cannot make choice when dialogue is done (current node pointer == nullptr)");
+        }
         
         if (p_current != nullptr) {
             if (!p_current->seen) {
