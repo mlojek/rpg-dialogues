@@ -1,6 +1,7 @@
 #ifndef TEST_DIALOGUE_HPP
 #define TEST_DIALOGUE_HPP
 
+
 #include <gtest/gtest.h>
 #include <iterator>
 #include <stdexcept>
@@ -475,9 +476,7 @@ TEST(testDialogue, testMakeChoiceCurrentNullptr) {
 }
 
 
-
-
-// Reset:
+// isDone and reset:
 TEST(testDialogue, testReset) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
@@ -504,6 +503,7 @@ TEST(testDialogue, testIsDoneFalse) {
 
     ASSERT_FALSE(testDialogue.isDone());
 }
+
 
 // Respect:
 TEST(testDialogue, testRespectConstructorDefault) {
@@ -654,5 +654,6 @@ TEST(testDialogue, testInfoDialogueOutcome) {
 
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({1, 5}));
 }
+
 
 #endif
