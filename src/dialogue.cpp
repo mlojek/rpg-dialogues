@@ -2,6 +2,7 @@
 #include <initializer_list>
 #include <stdexcept>
 #include <string>
+#include <tuple>
 #include <vector>
 
 
@@ -171,41 +172,58 @@ namespace rpgDialogue {
         }
     }
 
-    // std::vector<std::tuple<std::string, bool>> Dialogue::getChoicesInfo() const {
-    //     if (p_current == nullptr) {
-    //         return {};
-    //     }
-    //     else {
-    //         std::vector<std::tuple<std::string, bool>> result;
-    //         result.reserve(p_current->choices.size());
-    //         int i = 0;
+    std::vector<std::tuple<std::string, bool>> Dialogue::getChoicesInfo() const {
+        if (p_current == nullptr) {
+            return {};
+        }
+        else {
+            std::vector<std::tuple<std::string, bool>> result;
+            result.reserve(p_current->choices.size());
+            int i = 0;
 
-    //         for (Node* choice : p_current->choices) {
-    //             result.emplace_back(choice->message, choice->seen);
-    //             i++;
-    //         }
+            // TODO temporary solution, fix imediately!!!
+            std::tuple<std::string, bool> newElement;
 
-    //         return result;
-    //     }
-    // }
+            for (Node* choice : p_current->choices) {
+                if (choice == nullptr)
+                    newElement = {END_MESSAGE, false};
+                else
+                    newElement = {choice->message, choice->seen};
 
-    // std::vector<std::tuple<std::string, bool>> Dialogue::printChoicesInfo() const {
-    //     if (p_current == nullptr) {
-    //         return {};
-    //     }
-    //     else {
-    //         std::vector<std::tuple<std::string, bool>> result;
-    //         result.reserve(p_current->choices.size());
-    //         int i = 0;
+                result.push_back(newElement);
+                i++;
+            }
 
-    //         for (Node* choice : p_current->choices) {
-    //             result.emplace_back(std::string(choice->speaker + ": " + choice->message), choice->seen);
-    //             i++;
-    //         }
+            return result;
+        }
+    }
 
-    //         return result;
-    //     }
-    // }
+    std::vector<std::tuple<std::string, bool>> Dialogue::printChoicesInfo() const {
+        if (p_current == nullptr) {
+            return {};
+        }
+        else {
+            std::vector<std::tuple<std::string, bool>> result;
+            result.reserve(p_current->choices.size());
+            int i = 0;
+
+            // TODO temporary solution, fix imediately!!!
+            std::tuple<std::string, bool> newElement;
+
+            for (Node* choice : p_current->choices) {
+                if (choice == nullptr)
+                    newElement = {END_MESSAGE, false};
+                else
+                    newElement = {choice->speaker + ": " + choice->message, choice->seen};
+
+                result.push_back(newElement);
+                i++;
+            }
+
+            return result;
+        }
+    }
+
 
     // Navigating/playing the dialogue:
     void Dialogue::makeChoice(unsigned choiceNo) {
