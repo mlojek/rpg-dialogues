@@ -2,6 +2,7 @@
 #define TEST_DIALOGUE_HPP
 
 #include <gtest/gtest.h>
+#include <iterator>
 #include <stdexcept>
 #include <string>
 #include <vector>
@@ -347,49 +348,78 @@ TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
 }
 
 
+// Choices info:
+TEST(testDialogue, testGetChoicesInfo) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
 
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
 
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
 
+    std::vector<std::tuple<std::string, bool>> expected = {{"message1", false},
+                                                           {"message2", false},
+                                                           {END_MESSAGE, false}};
 
+    ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
+}
 
+TEST(testDialogue, testGetChoicesInfoNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
 
+    std::vector<std::tuple<std::string, bool>> expected = {};
 
-TEST(testDialogue, testGetChoiceMessagesTerminalChoice) {
+    ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
+}
+
+TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
     testDialogue.addTerminalChoice(0);
-    std::vector<std::string> expectedChoiceMessages = {END_MESSAGE};
+    testDialogue.makeChoice(0);
 
-    ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
+    std::vector<std::tuple<std::string, bool>> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
 }
 
+TEST(testDialogue, testPrintChoicesInfo) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-// TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
-//     Dialogue testDialogue = Dialogue("Head message", "speaker");
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
 
-//     testDialogue.addTerminalChoice(0);
-//     testDialogue.makeChoice(0);
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
 
-//     std::vector<std::tuple<std::string, bool>> expected = {};
+    std::vector<std::tuple<std::string, bool>> expected = {{"speaker1: message1", false},
+                                                           {"speaker2: message2", false},
+                                                           {END_MESSAGE, false}};
 
-//     ASSERT_EQ(testDialogue.getChoicesInfo(), expected);
-// }
+    ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
+}
 
-// TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
-//     Dialogue testDialogue = Dialogue("Head message", "speaker");
+TEST(testDialogue, testPrintChoicesInfoNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-//     testDialogue.addTerminalChoice(0);
-//     testDialogue.makeChoice(0);
+    std::vector<std::tuple<std::string, bool>> expected = {};
 
-//     std::vector<std::tuple<std::string, bool>> expected = {};
+    ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
+}
 
-//     ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
-// }
+TEST(testDialogue, testPrintChoicesInfoCurrentNullptr) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
 
+    testDialogue.addTerminalChoice(0);
+    testDialogue.makeChoice(0);
 
+    std::vector<std::tuple<std::string, bool>> expected = {};
 
-
-
+    ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
+}
 
 
 // Make choice:
@@ -435,29 +465,19 @@ TEST(testDialogue, testMakeChoiceNegativeIndex) {
     ASSERT_THROW(testDialogue.makeChoice(-1), std::out_of_range);
 }
 
-// TEST(testNode, testMakeChoiceTerminalChoice) {
-//     Node testNode = Node("message", "speaker");
-
-//     testNode.addChoice(nullptr);
-
-//     ASSERT_EQ(testNode.makeChoice(0), nullptr);
-// }
-
 TEST(testDialogue, testMakeChoiceCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
     testDialogue.addTerminalChoice(0);
     testDialogue.makeChoice(0);
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.makeChoice(0);
+    ASSERT_THROW(testDialogue.makeChoice(0), std::logic_error);
 }
 
 
 
 
-
+// Reset:
 TEST(testDialogue, testReset) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
     testDialogue.addNode("New message", "new speaker");
