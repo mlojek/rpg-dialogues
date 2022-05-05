@@ -207,11 +207,30 @@ TEST(testDialogue, testGetChoicesSeenCurrentNullptr) {
 }
 
 
-
-
-
-
 // Current choice messages getters:
+TEST(testDialogue, testGetChoiceMessages) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+
+    std::vector<std::string> expected = {"message1", "message2", END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.getChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testGetChoiceMessagesNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoiceMessages(), expected);
+}
+
 TEST(testDialogue, testGetChoiceMessagesCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -221,6 +240,29 @@ TEST(testDialogue, testGetChoiceMessagesCurrentNullptr) {
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testDialogue.getChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testGetChoiceMessagesNumbered) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+
+    std::vector<std::string> expected = {"0) message1", "1) message2", "2) " + END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.getChoiceMessagesNumbered(), expected);
+}
+
+TEST(testDialogue, testGetChoiceMessagesNumberedNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.getChoiceMessagesNumbered(), expected);
 }
 
 TEST(testDialogue, testGetChoiceMessagesNumberedCurrentNullptr) {
@@ -234,6 +276,31 @@ TEST(testDialogue, testGetChoiceMessagesNumberedCurrentNullptr) {
     ASSERT_EQ(testDialogue.getChoiceMessagesNumbered(), expected);
 }
 
+
+// Current choice messages printers:
+TEST(testDialogue, testPrintChoiceMessages) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+
+    std::vector<std::string> expected = {"speaker1: message1", "speaker2: message2", END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.printChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testPrintChoiceMessagesNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.printChoiceMessages(), expected);
+}
+
 TEST(testDialogue, testPrintChoiceMessagesCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -243,6 +310,29 @@ TEST(testDialogue, testPrintChoiceMessagesCurrentNullptr) {
     std::vector<std::string> expected = {};
 
     ASSERT_EQ(testDialogue.printChoiceMessages(), expected);
+}
+
+TEST(testDialogue, testPrintChoiceMessagesNumbered) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+
+    std::vector<std::string> expected = {"0) speaker1: message1", "1) speaker2: message2", "2) " + END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
+}
+
+TEST(testDialogue, testPrintChoiceMessagesNumberedNoChoices) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    std::vector<std::string> expected = {};
+
+    ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
 }
 
 TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
@@ -255,6 +345,14 @@ TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
 
     ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
 }
+
+
+
+
+
+
+
+
 
 TEST(testDialogue, testGetChoiceMessagesTerminalChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
