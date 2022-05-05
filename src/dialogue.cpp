@@ -75,6 +75,7 @@ namespace rpgDialogue {
         }
         else {
             std::vector<bool> result;
+            result.reserve(p_current->choices.size());
 
             for (Node* choice : p_current->choices) {
                 if (choice == nullptr)
@@ -94,6 +95,7 @@ namespace rpgDialogue {
         }
         else {
             std::vector<std::string> result;
+            result.reserve(p_current->choices.size());
 
             for (Node* choice : p_current->choices) {
                 if (choice == nullptr)
@@ -112,6 +114,7 @@ namespace rpgDialogue {
         }
         else {
             std::vector<std::string> result;
+            result.reserve(p_current->choices.size());
             int i = 0;
 
             for (Node* choice : p_current->choices) {
@@ -133,6 +136,7 @@ namespace rpgDialogue {
         }
         else {
             std::vector<std::string> result;
+            result.reserve(p_current->choices.size());
 
             for (Node* choice : p_current->choices) {
                 if (choice == nullptr)
@@ -151,6 +155,7 @@ namespace rpgDialogue {
         }
         else {
             std::vector<std::string> result;
+            result.reserve(p_current->choices.size());
             int i = 0;
 
             for (Node* choice : p_current->choices) {
@@ -172,6 +177,7 @@ namespace rpgDialogue {
     //     }
     //     else {
     //         std::vector<std::tuple<std::string, bool>> result;
+    //         result.reserve(p_current->choices.size());
     //         int i = 0;
 
     //         for (Node* choice : p_current->choices) {
@@ -189,6 +195,7 @@ namespace rpgDialogue {
     //     }
     //     else {
     //         std::vector<std::tuple<std::string, bool>> result;
+    //         result.reserve(p_current->choices.size());
     //         int i = 0;
 
     //         for (Node* choice : p_current->choices) {
