@@ -2,6 +2,7 @@
 #define TEST_DIALOGUE_HPP
 
 #include <gtest/gtest.h>
+#include <stdexcept>
 #include <string>
 #include <vector>
 #include "../include/dialogue.hpp"
@@ -10,6 +11,7 @@
 using namespace rpgDialogue;
 
 
+// Constructor:
 TEST(testDialogue, testConstructorDefaults) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -20,6 +22,7 @@ TEST(testDialogue, testConstructorDefaults) {
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
     ASSERT_EQ(testDialogue.getInfo(), std::set<int>({0}));
 }
+
 
 // Nodes manipulation:
 TEST(testDialogue, testAddNodeAndGetNodeCount) {
@@ -35,6 +38,7 @@ TEST(testDialogue, testAddNodeAndGetIndex) {
     ASSERT_EQ(testDialogue.addNode("New message", "new speaker"), 1);
     ASSERT_EQ(testDialogue.addNode("Other message", "other speaker"), 2);
 }
+
 
 // Nodes linking:
 TEST(testDialogue, testLinkNodes) {
@@ -53,9 +57,7 @@ TEST(testDialogue, testLinkNodesIndex0OutOfRange) {
     testDialogue.addNode("Message2", "Speaker2");
     testDialogue.addNode("Message3", "Speaker3");
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.linkNodes(4, 2);
+    ASSERT_THROW(testDialogue.linkNodes(4, 2), std::out_of_range);
 }
 
 TEST(testDialogue, testLinkNodesIndex1OutOfRange) {
@@ -65,9 +67,7 @@ TEST(testDialogue, testLinkNodesIndex1OutOfRange) {
     testDialogue.addNode("Message2", "Speaker2");
     testDialogue.addNode("Message3", "Speaker3");
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.linkNodes(2, 10);
+    ASSERT_THROW(testDialogue.linkNodes(2, 10), std::out_of_range);
 }
 
 TEST(testDialogue, testLinkNodesBothOutOfRange) {
@@ -77,38 +77,57 @@ TEST(testDialogue, testLinkNodesBothOutOfRange) {
     testDialogue.addNode("Message2", "Speaker2");
     testDialogue.addNode("Message3", "Speaker3");
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.linkNodes(5, 10);
+    ASSERT_THROW(testDialogue.linkNodes(5, 10), std::out_of_range);
 }
 
+TEST(testDialogue, testLinkNodesIndexesEqual) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    ASSERT_THROW(testDialogue.linkNodes(0, 0), std::invalid_argument);
+}
+
+
+// Adding terminal choices:
 TEST(testDialogue, testAddTerminalChoice) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
     testDialogue.addTerminalChoice(0);
-    std::vector<std::string> expectedChoiceMessages = {END_MESSAGE};
 
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
-    ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
 }
 
 TEST(testDialogue, testAddTerminalChoiceIndexOutOfRange) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.addTerminalChoice(3);
+    ASSERT_THROW(testDialogue.addTerminalChoice(3), std::out_of_range);
 }
 
 TEST(testDialogue, testAddTerminalChoiceNegativeIndex) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
-    // The point of this test is to make sure it doesnt crash
-    // No assertion is required here
-    testDialogue.addTerminalChoice(-1);
+    ASSERT_THROW(testDialogue.addTerminalChoice(-1), std::out_of_range);
 }
 
+
 // Current message getters:
+TEST(testDialogue, testGetMessage) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    ASSERT_EQ(testDialogue.getMessage(), "Head message");
+}
+
+TEST(testDialogue, testGetSpeaker) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    ASSERT_EQ(testDialogue.getSpeaker(), "speaker");
+}
+
+TEST(testDialogue, testPrintMessage) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    ASSERT_EQ(testDialogue.printMessage(), "speaker: Head message");
+}
+
 TEST(testDialogue, testGetMessageCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -136,7 +155,22 @@ TEST(testDialogue, testPrintMessageCurrentNullptr) {
     ASSERT_EQ(testDialogue.printMessage(), END_MESSAGE);
 }
 
+
 // Current choices info:
+TEST(testDialogue, testGetChoiceCount) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+    testDialogue.addTerminalChoice(0);
+
+    ASSERT_EQ(testDialogue.getChoiceCount(), 4);
+}
+
 TEST(testDialogue, testGetChoiceCountCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -144,6 +178,21 @@ TEST(testDialogue, testGetChoiceCountCurrentNullptr) {
     testDialogue.makeChoice(0);
 
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
+}
+
+TEST(testDialogue, testGetChoicesSeen) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addNode("message1", "speaker1");
+    testDialogue.addNode("message2", "speaker2");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.addTerminalChoice(0);
+
+    std::vector<bool> expected = {false, false, false};
+
+    ASSERT_EQ(testDialogue.getChoicesSeen(), expected);
 }
 
 TEST(testDialogue, testGetChoicesSeenCurrentNullptr) {
@@ -156,6 +205,11 @@ TEST(testDialogue, testGetChoicesSeenCurrentNullptr) {
 
     ASSERT_EQ(testDialogue.getChoicesSeen(), expected);
 }
+
+
+
+
+
 
 // Current choice messages getters:
 TEST(testDialogue, testGetChoiceMessagesCurrentNullptr) {
@@ -201,6 +255,16 @@ TEST(testDialogue, testPrintChoiceMessagesNumberedCurrentNullptr) {
 
     ASSERT_EQ(testDialogue.printChoiceMessagesNumbered(), expected);
 }
+
+TEST(testDialogue, testGetChoiceMessagesTerminalChoice) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+
+    testDialogue.addTerminalChoice(0);
+    std::vector<std::string> expectedChoiceMessages = {END_MESSAGE};
+
+    ASSERT_EQ(testDialogue.getChoiceMessages(), expectedChoiceMessages);
+}
+
 
 // TEST(testDialogue, testGetChoicesInfoCurrentNullptr) {
 //     Dialogue testDialogue = Dialogue("Head message", "speaker");
