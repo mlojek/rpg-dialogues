@@ -67,7 +67,7 @@ namespace rpgDialogue {
         std::set<int> getInfo() const;
 
         // Validation:
-        bool isValid();
+        bool isValid() const;
     };
 }
 
