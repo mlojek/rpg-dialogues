@@ -288,7 +288,63 @@ TEST(testDialogue, testGetChoiceMessagesTerminalChoice) {
 //     ASSERT_EQ(testDialogue.printChoicesInfo(), expected);
 // }
 
-// Navigating and playing the dialogue:
+
+
+
+
+
+
+// Make choice:
+TEST(testDialogue, testMakeChoice) {
+    Dialogue testDialogue = Dialogue("Head message", "speaker");
+    testDialogue.addNode("New message", "new speaker");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.makeChoice(0);
+
+    ASSERT_EQ(testDialogue.printMessage(), "new speaker: New message");
+}
+
+TEST(testDialogue, testMakeChoiceNoChoices) {
+    Dialogue testDialogue = Dialogue("message", "speaker");
+
+    ASSERT_THROW(testDialogue.makeChoice(0), std::out_of_range);
+}
+
+TEST(testDialogue, testMakeChoiceOutOfRange) {
+    Dialogue testDialogue("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.linkNodes(0, 3);
+
+    ASSERT_THROW(testDialogue.makeChoice(3), std::out_of_range);
+}
+
+TEST(testDialogue, testMakeChoiceNegativeIndex) {
+    Dialogue testDialogue("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+    testDialogue.addNode("message", "speaker");
+
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(0, 2);
+    testDialogue.linkNodes(0, 3);
+
+    ASSERT_THROW(testDialogue.makeChoice(-1), std::out_of_range);
+}
+
+// TEST(testNode, testMakeChoiceTerminalChoice) {
+//     Node testNode = Node("message", "speaker");
+
+//     testNode.addChoice(nullptr);
+
+//     ASSERT_EQ(testNode.makeChoice(0), nullptr);
+// }
+
 TEST(testDialogue, testMakeChoiceCurrentNullptr) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
 
@@ -300,16 +356,9 @@ TEST(testDialogue, testMakeChoiceCurrentNullptr) {
     testDialogue.makeChoice(0);
 }
 
-TEST(testDialogue, testMakeChoice) {
-    Dialogue testDialogue = Dialogue("Head message", "speaker");
-    testDialogue.addNode("New message", "new speaker");
 
-    testDialogue.linkNodes(0, 1);
-    testDialogue.makeChoice(0);
 
-    ASSERT_EQ(testDialogue.getMessage(), "New message");
-    ASSERT_EQ(testDialogue.getSpeaker(), "new speaker");
-}
+
 
 TEST(testDialogue, testReset) {
     Dialogue testDialogue = Dialogue("Head message", "speaker");
