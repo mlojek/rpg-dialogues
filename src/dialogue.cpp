@@ -271,4 +271,9 @@ namespace rpgDialogue {
     std::set<int> Dialogue::getInfo() const {
         return m_info;
     }
+
+    // Validaton:
+    bool Dialogue::isValid() const {
+        return false;
+    }
 }
