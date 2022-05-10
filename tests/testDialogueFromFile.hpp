@@ -163,4 +163,15 @@ TEST(testDialogueFromFile, testNoTerminal) {
 }
 
 
+
+
+
+
+TEST(testValid, testValidMerchant) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+
+    ASSERT_TRUE(testDialogue.isValid());
+}
+
+
 #endif
