@@ -285,8 +285,6 @@ namespace rpgDialogue {
 
         // Every node has to be accessible from the head
 
-        // max recursion depth should be the number of nodes!
-
         return true;
     }
 
