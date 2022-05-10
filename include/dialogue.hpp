@@ -21,11 +21,15 @@ namespace rpgDialogue {
             Node(std::string message, std::string speaker, int respectGain = 0, int infoGain = 0) : message(message), speaker(speaker), respectGain(respectGain), infoGain(infoGain) {};
         };
 
+
         Node* p_head;
         Node* p_current;
         std::vector<Node> m_nodes;
         int m_respect;
         std::set<int> m_info;
+
+
+        bool seekEnd(Node* current, unsigned recursion_depth) const;
 
     public:
         Dialogue(std::string headMessage, std::string speaker, int respectGain = 0, int infoGain = 0);
