@@ -281,6 +281,8 @@ namespace rpgDialogue {
                 return false;
 
         // There has to be a way to get to nullptr from head
+        if (!seekEnd(p_head, m_nodes.size())) return false;
+
         // Every node has to be accessible from the head
 
         // max recursion depth should be the number of nodes!
