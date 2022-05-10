@@ -294,8 +294,8 @@ namespace rpgDialogue {
         for (Node* choice : current->choices) {
             if (choice == nullptr)
                 return true;
-            else
-                return seekEnd(choice, recursion_depth - 1);
+            else if (seekEnd(choice, recursion_depth - 1))
+                return true;
         }
 
         return false;
