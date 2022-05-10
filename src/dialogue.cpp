@@ -1,4 +1,5 @@
 #include "../include/dialogue.hpp"
+#include <cstddef>
 #include <initializer_list>
 #include <stdexcept>
 #include <string>
@@ -285,5 +286,18 @@ namespace rpgDialogue {
         // max recursion depth should be the number of nodes!
 
         return true;
+    }
+
+    bool Dialogue::seekEnd(Node* current, unsigned recursion_depth) const {
+        if (recursion_depth == 0) return false;
+
+        for (Node* choice : current->choices) {
+            if (choice == nullptr)
+                return true;
+            else
+                return seekEnd(choice, recursion_depth - 1);
+        }
+
+        return false;
     }
 }
