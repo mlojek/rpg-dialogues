@@ -291,10 +291,9 @@ namespace rpgDialogue {
     bool Dialogue::seekEnd(Node* current, unsigned recursion_depth) const {
         if (recursion_depth == 0) return false;
 
-        for (Node* choice : current->choices) {
+        for (Node* choice : current->choices)
             if (choice == nullptr || seekEnd(choice, recursion_depth - 1))
                 return true;
-        }
 
         return false;
     }
