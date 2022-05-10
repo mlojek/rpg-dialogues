@@ -275,8 +275,8 @@ namespace rpgDialogue {
     // Validaton:
     bool Dialogue::isValid() const {
         // Every node has to have at least one choice
-        for (const Node& nodek : m_nodes)
-            if (nodek.choices.size() == 0)
+        for (const Node& node : m_nodes)
+            if (node.choices.size() == 0)
                 return false;
 
         // There has to be a way to get to nullptr from head
