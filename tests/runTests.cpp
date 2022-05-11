@@ -3,6 +3,7 @@
 // #include "testNode.hpp"
 #include "testDialogue.hpp"
 #include "testDialogueFromFile.hpp"
+#include "testDialogueIsValid.hpp"
 
 
 int main(int argc, char **argv) {
