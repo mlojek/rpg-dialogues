@@ -30,6 +30,7 @@ namespace rpgDialogue {
 
 
         bool seekEnd(Node* current, unsigned recursion_depth) const;
+        std::set<Node*> visitAll(Node* current, unsigned recursion_depth_depth) const;
 
     public:
         Dialogue(std::string headMessage, std::string speaker, int respectGain = 0, int infoGain = 0);
