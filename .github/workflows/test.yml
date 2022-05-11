@@ -17,4 +17,4 @@ jobs:
     #   run: make test
     - uses: actions/checkout@v2
     - name: Test project with googletest.
-      uses: arvsrao/googletest-action@main
+      uses: arvsrao/googletest-action@master
