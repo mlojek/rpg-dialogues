@@ -16,12 +16,14 @@ TEST(testDialogueIsValid, testMerchant) {
     ASSERT_TRUE(testDialogue.isValid());
 }
 
+// Every node has to have at least one choice
 TEST(testDialogueIsValid, testJustOneNode) {
     Dialogue testDialogue("Head message", "Head speaker");
 
     ASSERT_FALSE(testDialogue.isValid());
 }
 
+// There has to be a way to get to nullptr from head
 TEST(testDialogueIsValid, testJustOneNodeAndEnd) {
     Dialogue testDialogue("Head message", "Head speaker");
 
@@ -30,6 +32,7 @@ TEST(testDialogueIsValid, testJustOneNodeAndEnd) {
     ASSERT_TRUE(testDialogue.isValid());
 }
 
+// Every node has to be accessible from the head
 
 
 #endif
