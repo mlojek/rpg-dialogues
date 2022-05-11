@@ -58,6 +58,28 @@ TEST(testDialogueIsValid, testOrphanedNode) {
     ASSERT_FALSE(testDialogue.isValid());
 }
 
+TEST(testDialogueIsValid, testOrphanedNodeLinked) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+
+    ASSERT_TRUE(testDialogue.isValid());
+
+    unsigned orphanIndex = testDialogue.addNode("orphan message", "orphan speaker");
+    testDialogue.linkNodes(orphanIndex, 2);
+
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
+TEST(testDialogueIsValid, testOrphanedNodeWithEnd) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+
+    ASSERT_TRUE(testDialogue.isValid());
+
+    unsigned orphanIndex = testDialogue.addNode("orphan message", "orphan speaker");
+    testDialogue.addTerminalChoice(orphanIndex);
+
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
 TEST(testDialogueIsValid, testEndUnreachable) {
     Dialogue testDialogue("Head message", "Head speaker");
     testDialogue.addNode("Message1", "speaker1");
