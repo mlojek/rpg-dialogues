@@ -284,6 +284,7 @@ namespace rpgDialogue {
         if (!seekEnd(p_head, m_nodes.size())) return false;
 
         // Every node has to be accessible from the head
+        if (visitAll(p_head, m_nodes.size()).size() != m_nodes.size()) return false;
 
         return true;
     }
