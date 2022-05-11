@@ -13,11 +13,5 @@ jobs:
     - name: Install gtest
       uses: MarkusJx/googletest-installer@v1.1
     - uses: actions/checkout@v1
-    - name: configure
-      run: mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="-Werror" ..
-    - name: make
-      run: cd build && make
-    - name: Run Test
-      run: /home/runner/work/github_actions_gtest_example/github_actions_gtest_example/build/test/github_actions_gtest_example.test
-    - name: print message
-      run: echo All done
+    - name: run tests
+      run: make test
