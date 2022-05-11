@@ -58,6 +58,21 @@ TEST(testDialogueIsValid, testOrphanedNode) {
     ASSERT_FALSE(testDialogue.isValid());
 }
 
+TEST(testDialogueIsValid, testEndUnreachable) {
+    Dialogue testDialogue("Head message", "Head speaker");
+    testDialogue.addNode("Message1", "speaker1");
+    testDialogue.addNode("Message2", "speaker2");
+    testDialogue.addNode("End node", "speaker 3");
+    
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+    testDialogue.linkNodes(2, 0);
+
+    testDialogue.addTerminalChoice(3);
+    
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
 
 
 
