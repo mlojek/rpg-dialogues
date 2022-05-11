@@ -1,8 +1,8 @@
 CC = g++
-CFLAGS =
+CFLAGS = -std=c++17
 GTESTFLAGS = -lgtest -lgtest_main -pthread
 
 
 test:
-	$(CC) $(GTESTFLAGS) tests/runTests.cpp src/* -o runTests
+	$(CC) $(CFLAGS) $(GTESTFLAGS) tests/runTests.cpp src/* -o runTests
 	./runTests
