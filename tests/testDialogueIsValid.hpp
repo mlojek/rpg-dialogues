@@ -35,4 +35,30 @@ TEST(testDialogueIsValid, testJustOneNodeAndEnd) {
 // Every node has to be accessible from the head
 
 
+
+TEST(testDialogueIsValid, testLoop) {
+    Dialogue testDialogue("Head message", "Head speaker");
+    testDialogue.addNode("Message1", "speaker1");
+    testDialogue.addNode("Message2", "speaker2");
+    
+    testDialogue.linkNodes(0, 1);
+    testDialogue.linkNodes(1, 2);
+    testDialogue.linkNodes(2, 0);
+    
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
+TEST(testDialogueIsValid, testOrphanedNode) {
+    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+
+    ASSERT_TRUE(testDialogue.isValid());
+
+    testDialogue.addNode("orphan message", "orphan speaker");
+
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
+
+
+
 #endif
