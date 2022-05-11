@@ -19,3 +19,5 @@ jobs:
       run: cd build && make
     - name: Run Test
       run: /home/runner/work/github_actions_gtest_example/github_actions_gtest_example/build/test/github_actions_gtest_example.test
+    - name: print message
+      run: echo All done
