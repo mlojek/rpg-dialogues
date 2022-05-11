@@ -16,5 +16,20 @@ TEST(testDialogueIsValid, testMerchant) {
     ASSERT_TRUE(testDialogue.isValid());
 }
 
+TEST(testDialogueIsValid, testJustOneNode) {
+    Dialogue testDialogue("Head message", "Head speaker");
+
+    ASSERT_FALSE(testDialogue.isValid());
+}
+
+TEST(testDialogueIsValid, testJustOneNodeAndEnd) {
+    Dialogue testDialogue("Head message", "Head speaker");
+
+    testDialogue.addTerminalChoice(0);
+
+    ASSERT_TRUE(testDialogue.isValid());
+}
+
+
 
 #endif
