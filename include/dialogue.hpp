@@ -30,7 +30,18 @@ namespace rpgDialogue {
 
 
         bool seekEnd(Node* current, unsigned recursion_depth) const;
-        std::set<Node*> visitAll(Node* current, unsigned recursion_depth) const;
+        std::set<Node*> visitAll(Node* current, unsigned recursion_depth) const {
+            if (recursion_depth == 0 || current == nullptr)
+                return {};
+
+            std::set<Node*> result({current});
+
+            for (Node* choice : current->choices)
+                if (choice != nullptr)
+                    result.merge(visitAll(choice, recursion_depth - 1));
+
+            return result;
+        }
 
     public:
         Dialogue(std::string headMessage, std::string speaker, int respectGain = 0, int infoGain = 0);
