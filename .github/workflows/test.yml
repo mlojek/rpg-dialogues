@@ -10,11 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    # - name: Install gtest
-    #   uses: MarkusJx/googletest-installer@v1.1
-    # - uses: actions/checkout@v1
-    # - name: run tests
-    #   run: make test
-    - uses: actions/checkout@v2
-    - name: Test project with googletest.
-      uses: arvsrao/googletest-action@master
+    - name: Install gtest
+      uses: MarkusJx/googletest-installer@v1.1
+    - uses: actions/checkout@v1
+    - name: run tests
+      run: make test
