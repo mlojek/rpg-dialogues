@@ -3,6 +3,7 @@ CFLAGS = -std=c++17
 GTESTFLAGS = -lgtest -lgtest_main -pthread
 
 
-test:
+all:
 	$(CC) $(CFLAGS) $(GTESTFLAGS) runTests.cpp ../src/* -o runTests
+test: all
 	./runTests
