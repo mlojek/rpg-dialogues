@@ -1,2 +1,3 @@
 examples/01-merchant/run
+examples/02-merchant-from-file/run
 runTests
