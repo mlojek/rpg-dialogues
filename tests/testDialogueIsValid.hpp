@@ -11,7 +11,7 @@ using namespace rpgDialogue;
 
 
 TEST(testDialogueIsValid, testMerchant) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+    Dialogue testDialogue = dialogueFromFile("testFiles/merchant");
 
     ASSERT_TRUE(testDialogue.isValid());
 }
@@ -43,7 +43,7 @@ TEST(testDialogueIsValid, testLoop) {
 }
 
 TEST(testDialogueIsValid, testOrphanedNode) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+    Dialogue testDialogue = dialogueFromFile("testFiles/merchant");
 
     ASSERT_TRUE(testDialogue.isValid());
 
@@ -53,7 +53,7 @@ TEST(testDialogueIsValid, testOrphanedNode) {
 }
 
 TEST(testDialogueIsValid, testOrphanedNodeLinked) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+    Dialogue testDialogue = dialogueFromFile("testFiles/merchant");
 
     ASSERT_TRUE(testDialogue.isValid());
 
@@ -64,7 +64,7 @@ TEST(testDialogueIsValid, testOrphanedNodeLinked) {
 }
 
 TEST(testDialogueIsValid, testOrphanedNodeWithEnd) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+    Dialogue testDialogue = dialogueFromFile("testFiles/merchant");
 
     ASSERT_TRUE(testDialogue.isValid());
 

@@ -11,7 +11,7 @@ using namespace rpgDialogue;
 
 
 TEST(testDialogueFromFile, testCorrect) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correct");
+    Dialogue testDialogue = dialogueFromFile("testFiles/correct");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -29,7 +29,7 @@ TEST(testDialogueFromFile, testCorrect) {
 }
 
 TEST(testDialogueFromFile, testCorrectTrailingLines) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctTrailingLines");
+    Dialogue testDialogue = dialogueFromFile("testFiles/correctTrailingLines");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -47,15 +47,15 @@ TEST(testDialogueFromFile, testCorrectTrailingLines) {
 }
 
 TEST(testDialogueFromFile, testCorrectSingleIndexInLink) {
-    ASSERT_THROW(dialogueFromFile("tests/testFiles/correctSingleIndexInLink"), DialogueFileException);
+    ASSERT_THROW(dialogueFromFile("testFiles/correctSingleIndexInLink"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testCorrectEmptyFirstLine) {
-    ASSERT_THROW(dialogueFromFile("tests/testFiles/correctEmptyFirstLine"), DialogueFileException);
+    ASSERT_THROW(dialogueFromFile("testFiles/correctEmptyFirstLine"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testCorrectSpaceAfterInt) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctSpaceAfterInt");
+    Dialogue testDialogue = dialogueFromFile("testFiles/correctSpaceAfterInt");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -73,7 +73,7 @@ TEST(testDialogueFromFile, testCorrectSpaceAfterInt) {
 }
 
 TEST(testDialogueFromFile, testCorrectLinkDoubleSpace) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctLinkDoubleSpace");
+    Dialogue testDialogue = dialogueFromFile("testFiles/correctLinkDoubleSpace");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -84,7 +84,7 @@ TEST(testDialogueFromFile, testCorrectLinkDoubleSpace) {
 }
 
 TEST(testDialogueFromFile, testCorrectNegativeNumbers) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/correctNegativeNumbers");
+    Dialogue testDialogue = dialogueFromFile("testFiles/correctNegativeNumbers");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -102,7 +102,7 @@ TEST(testDialogueFromFile, testCorrectNegativeNumbers) {
 }
 
 TEST(testDialogueFromFile, testMerchant) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/merchant");
+    Dialogue testDialogue = dialogueFromFile("testFiles/merchant");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 10);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -119,22 +119,22 @@ TEST(testDialogueFromFile, testMerchant) {
 }
 
 TEST(testDialogueFromFile, testEmptyFile) {
-    ASSERT_THROW(dialogueFromFile("tests/testFiles/empty"), DialogueFileException);
+    ASSERT_THROW(dialogueFromFile("testFiles/empty"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testNonexistentFile) {
-    ASSERT_THROW(dialogueFromFile("tests/testFiles/thisFileDoesNotExist"), DialogueFileException);
+    ASSERT_THROW(dialogueFromFile("testFiles/thisFileDoesNotExist"), DialogueFileException);
 }
 
 TEST(testDialogueFromFile, testJustHeadNode) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justHeadNode");
+    Dialogue testDialogue = dialogueFromFile("testFiles/justHeadNode");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 1);
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
 TEST(testDialogueFromFile, testJustTerminalChoice) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justTerminalChoice");
+    Dialogue testDialogue = dialogueFromFile("testFiles/justTerminalChoice");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 1);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
@@ -145,14 +145,14 @@ TEST(testDialogueFromFile, testJustTerminalChoice) {
 }
 
 TEST(testDialogueFromFile, testJustNodes) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/justNodes");
+    Dialogue testDialogue = dialogueFromFile("testFiles/justNodes");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 3);
     ASSERT_EQ(testDialogue.getChoiceCount(), 0);
 }
 
 TEST(testDialogueFromFile, testNoTerminal) {
-    Dialogue testDialogue = dialogueFromFile("tests/testFiles/noTerminal");
+    Dialogue testDialogue = dialogueFromFile("testFiles/noTerminal");
 
     ASSERT_EQ(testDialogue.getNodeCount(), 2);
     ASSERT_EQ(testDialogue.getChoiceCount(), 1);
