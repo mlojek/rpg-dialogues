@@ -289,6 +289,7 @@ namespace rpgDialogue {
         return true;
     }
 
+    // Private methods:
     bool Dialogue::seekEnd(Node* current, unsigned recursion_depth) const {
         if (recursion_depth == 0) return false;
 
@@ -297,5 +298,18 @@ namespace rpgDialogue {
                 return true;
 
         return false;
+    }
+
+    std::set<Dialogue::Node*> Dialogue::visitAll(Node* current, unsigned recursion_depth) const {
+        if (recursion_depth == 0 || current == nullptr)
+            return {};
+
+        std::set<Node*> result({current});
+
+        for (Node* choice : current->choices)
+            if (choice != nullptr)
+                result.merge(visitAll(choice, recursion_depth - 1));
+
+        return result;
     }
 }
